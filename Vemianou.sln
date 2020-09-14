@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vemianou", "Vemianou\Vemianou.csproj", "{8FBA9943-20DC-47E9-8E21-CFF3C19C0E6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vemianou.Tests", "Vemianou.Tests\Vemianou.Tests.csproj", "{63DEE1BC-14A4-42C9-9D34-0FF3C6A9B2D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FBA9943-20DC-47E9-8E21-CFF3C19C0E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBA9943-20DC-47E9-8E21-CFF3C19C0E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBA9943-20DC-47E9-8E21-CFF3C19C0E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBA9943-20DC-47E9-8E21-CFF3C19C0E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63DEE1BC-14A4-42C9-9D34-0FF3C6A9B2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DEE1BC-14A4-42C9-9D34-0FF3C6A9B2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DEE1BC-14A4-42C9-9D34-0FF3C6A9B2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DEE1BC-14A4-42C9-9D34-0FF3C6A9B2D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D8CC807-896B-4A76-A9A3-EA4CAF40ADFB}
+	EndGlobalSection
+EndGlobal
