@@ -19,11 +19,34 @@ namespace Vemianou.Controllers
 
             return View();
         }
-
+        public ActionResult Causes()
+        {
+            return View();
+        }
+        public ActionResult Dons()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+        public ActionResult Blogs()
+        {
+            return View();
+        }
+        public ActionResult DetailsBlog()
+        {
+            return View();
+        }
+        public ActionResult Event()
+        {
+            return View();
+        }
+        public ActionResult Galleries()
+        {
             return View();
         }
     }
