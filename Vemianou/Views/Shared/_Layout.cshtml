@@ -23,6 +23,10 @@
     @Styles.Render("~/Content/css/style.css")
 
     @Scripts.Render("~/Content/js/jquery.min.js")
+
+    @Styles.Render("~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")
+    <!-- SweetAlert2 -->
+    @Scripts.Render("~/Content/plugins/sweetalert2/sweetalert2.min.js")
 </head>
 <body>
 
@@ -39,7 +43,7 @@
                     <li class="nav-item" id="about"><a href="@Url.Action("About","Home")" class="nav-link">A Propos</a></li>
                     <li class="nav-item" id="causes"><a href="@Url.Action("Causes","Home")" class="nav-link">Notre Mission</a></li>
                     @*<li class="nav-item" id="dons"><a href="@Url.Action("Dons","Home")" class="nav-link">Donate</a></li>
-                    <li class="nav-item" id="blogs"><a href="@Url.Action("Blogs","Home")" class="nav-link">Blog</a></li>*@
+                        <li class="nav-item" id="blogs"><a href="@Url.Action("Blogs","Home")" class="nav-link">Blog</a></li>*@
                     <li class="nav-item" id="galleries"><a href="@Url.Action("Galleries","Home")" class="nav-link">Galleries</a></li>
                     <li class="nav-item" id="events"><a href="@Url.Action("Event","Home")" class="nav-link">Evenements</a></li>
                     <li class="nav-item" id="contact"><a href="@Url.Action("Contact","Home")" class="nav-link">Contact</a></li>
@@ -49,7 +53,7 @@
     </nav>
     <!-- END nav -->
 
-    
+
     @RenderBody()
 
 
@@ -126,7 +130,7 @@
                     <p>
                         Copyright &copy;
                         <script>document.write(new Date().getFullYear());</script> Association Vemianou
-         
+
                     </p>
                 </div>
             </div>
@@ -155,9 +159,16 @@
     @Scripts.Render("~/Content/js/jquery.timepicker.min.js")
     @Scripts.Render("~/Content/js/scrollax.min.js")
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     @Scripts.Render("~/Content/js/google-map.js")
     @Scripts.Render("~/Content/js/main.js")
+    <script>
+        $(function () {
+            if ('@TempData["success"]' != "") {
+                Swal.fire('','@TempData["success"]', 'success')
+            }
+        });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 
 </body>
 </html>

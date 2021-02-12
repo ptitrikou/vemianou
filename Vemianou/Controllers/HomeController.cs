@@ -49,5 +49,12 @@ namespace Vemianou.Controllers
         {
             return View();
         }
+        
+        public ActionResult saveContact()
+        {
+            //return Redirect(Request.UrlReferrer.ToString());
+            TempData["success"] = "Contact envoyé avec succès !";
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -408,6 +408,14 @@
     <Content Include="Content\js\popper.min.js" />
     <Content Include="Content\js\range.js" />
     <Content Include="Content\js\scrollax.min.js" />
+    <Content Include="Content\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.css" />
+    <Content Include="Content\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.min.css" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.css" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.js" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Content\plugins\sweetalert2\sweetalert2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
