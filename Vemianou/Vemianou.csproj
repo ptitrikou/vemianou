@@ -582,7 +582,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_layout2.cshtml" />
     <Content Include="Views\Home\Causes.cshtml" />
     <Content Include="Views\Home\Dons.cshtml" />
     <Content Include="Views\Home\blogs.cshtml" />
