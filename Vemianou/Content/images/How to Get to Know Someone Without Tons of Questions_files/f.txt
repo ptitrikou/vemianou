@@ -1,0 +1,1 @@
+_gfp_s_({"_cookies_":[{"_value_":"ID=438dcefab6bec057-22ccf4997eba004d:T=1613499115:RT=1613499115:S=ALNI_MZzvLKdXO_fw0yuC0IrwMOX_TrXKA","_expires_":1647195115,"_path_":"/","_domain_":"healthline.com"}]});

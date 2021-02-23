@@ -37,9 +37,27 @@ namespace Vemianou.Controllers
         {
             return View();
         }
-        public ActionResult DetailsBlog()
+        public ActionResult DetailsBlog(int num)
         {
-            return View();
+            if (num == 1)
+            {
+                return View("journee_arbre");
+            }else if(num== 2)
+            {
+                return View("table_banc");
+            }else if (num == 3)
+            {
+                return View("remise_moto");
+            }
+            else if (num == 4)
+            {
+                return View("kit_scolaire");
+            }
+            else
+            {
+                return View("DetailsBlog");
+            }
+            
         }
         public ActionResult Event()
         {

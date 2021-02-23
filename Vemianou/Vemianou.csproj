@@ -267,6 +267,11 @@
     <Content Include="Content\images\dossier44\DSC_0233.JPG" />
     <Content Include="Content\images\dossier44\DSC_0247.JPG" />
     <Content Include="Content\images\dossier44\DSC_0256.JPG" />
+    <Content Include="Content\images\dossier5\im1.jpeg" />
+    <Content Include="Content\images\dossier5\im2.jpeg" />
+    <Content Include="Content\images\dossier5\im3.jpeg" />
+    <Content Include="Content\images\dossier5\im4.jpeg" />
+    <Content Include="Content\images\dossier5\im5.jpeg" />
     <Content Include="Content\images\event-1.jpg" />
     <Content Include="Content\images\event-2.jpg" />
     <Content Include="Content\images\event-3.jpg" />
@@ -588,6 +593,10 @@
     <Content Include="Views\Home\DetailsBlog.cshtml" />
     <Content Include="Views\Home\Event.cshtml" />
     <Content Include="Views\Home\Galleries.cshtml" />
+    <Content Include="Views\Home\journee_arbre.cshtml" />
+    <Content Include="Views\Home\remise_moto.cshtml" />
+    <Content Include="Views\Home\table_banc.cshtml" />
+    <Content Include="Views\Home\kit_scolaire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,122 @@
+.jwplayer {
+    overflow: visible !important
+}
+
+.jw-svg-icon {
+    width: 30px !important;
+    height: 30px !important
+}
+
+.jw-button-container {
+    padding-left: 0 !important
+}
+
+.apex-mobile .jw-button-container {
+    padding: 0 5px !important
+}
+
+.jw-icon {
+    width: 40px !important;
+    height: 40px !important;
+    position: relative !important
+}
+
+.apex-mobile .jw-icon {
+    top: -1px !important
+}
+
+.jw-svg-icon-play path {
+    display: none
+}
+
+.jw-svg-icon-play {
+    background-image: url(/apex/assets/btnPlay.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-svg-icon-pause path {
+    display: none
+}
+
+.jw-svg-icon-pause {
+    background-image: url(/apex/assets/btnPause.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-svg-icon-volume-0 path {
+    display: none
+}
+
+.jw-svg-icon-volume-0 {
+    background-image: url(/apex/assets/btnSoundsOff.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-svg-icon-volume-50 path {
+    display: none
+}
+
+.jw-svg-icon-volume-50 {
+    background-image: url(/apex/assets/btnSoundsOn.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-svg-icon-volume-100 path {
+    display: none
+}
+
+.jw-svg-icon-volume-100 {
+    background-image: url(/apex/assets/btnSoundsOn.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-icon-fullscreen {
+    display: none !important
+}
+
+.apex-mobile .jw-icon-fullscreen {
+    display: flex !important
+}
+
+.jw-svg-icon-fullscreen-on path {
+    display: none
+}
+
+.jw-svg-icon-fullscreen-on {
+    background-image: url(/apex/assets/btnFullscreen.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-svg-icon-fullscreen-off path {
+    display: none
+}
+
+.jw-svg-icon-fullscreen-off {
+    background-image: url(/apex/assets/btnFullscreenExit.svg);
+    background-size: contain;
+    background-repeat: no-repeat
+}
+
+.jw-slider-time.jw-slider-horizontal {
+    display: none !important
+}
+
+.apex-desktop .jw-controlbar {
+    width: 95px !important
+}
+
+.jw-skip.jw-skippable {
+    display: none !important;
+    visibility: hidden !important
+}
+
+.jw-text-alt {
+    display: none !important;
+    visibility: hidden !important
+}
