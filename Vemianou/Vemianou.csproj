@@ -220,6 +220,9 @@
     <Content Include="Content\images\bg_5.jpg" />
     <Content Include="Content\images\bg_6.jpg" />
     <Content Include="Content\images\bg_7.jpg" />
+    <Content Include="Content\images\bureau\im1.jpeg" />
+    <Content Include="Content\images\bureau\im2.jpeg" />
+    <Content Include="Content\images\bureau\im3.jpeg" />
     <Content Include="Content\images\cause-1.jpg" />
     <Content Include="Content\images\cause-2.jpg" />
     <Content Include="Content\images\cause-3.jpg" />
