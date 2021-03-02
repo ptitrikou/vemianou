@@ -275,6 +275,9 @@
     <Content Include="Content\images\dossier5\im3.jpeg" />
     <Content Include="Content\images\dossier5\im4.jpeg" />
     <Content Include="Content\images\dossier5\im5.jpeg" />
+    <Content Include="Content\images\dossier5\pr_av1.jpg" />
+    <Content Include="Content\images\dossier5\pr_av2.jpg" />
+    <Content Include="Content\images\dossier5\pr_av3.jpg" />
     <Content Include="Content\images\event-1.jpg" />
     <Content Include="Content\images\event-2.jpg" />
     <Content Include="Content\images\event-3.jpg" />
@@ -356,6 +359,7 @@
     <Content Include="Content\images\dossier22\DSC_0345.JPG" />
     <Content Include="Content\images\dossier22\DSC_0346.JPG" />
     <Content Include="Content\images\dossier22\DSC_0368.JPG" />
+    <Content Include="Content\images\logo_vemianou.jpg" />
     <Content Include="Content\images\person_1.jpg" />
     <Content Include="Content\images\person_2.jpg" />
     <Content Include="Content\images\person_3.jpg" />
