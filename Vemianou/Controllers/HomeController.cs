@@ -53,6 +53,10 @@ namespace Vemianou.Controllers
             {
                 return View("kit_scolaire");
             }
+            else if (num ==5)
+            {
+                return View("latrine_publique_badu");
+            }
             else
             {
                 return View("DetailsBlog");

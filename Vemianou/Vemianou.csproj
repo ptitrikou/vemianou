@@ -278,6 +278,18 @@
     <Content Include="Content\images\dossier5\pr_av1.jpg" />
     <Content Include="Content\images\dossier5\pr_av2.jpg" />
     <Content Include="Content\images\dossier5\pr_av3.jpg" />
+    <Content Include="Content\images\dossier6\im_1.jpeg" />
+    <Content Include="Content\images\dossier6\im_10.jpeg" />
+    <Content Include="Content\images\dossier6\im_11.jpeg" />
+    <Content Include="Content\images\dossier6\im_12.jpg" />
+    <Content Include="Content\images\dossier6\im_2.jpeg" />
+    <Content Include="Content\images\dossier6\im_3.jpeg" />
+    <Content Include="Content\images\dossier6\im_4.jpeg" />
+    <Content Include="Content\images\dossier6\im_5.jpeg" />
+    <Content Include="Content\images\dossier6\im_6.jpeg" />
+    <Content Include="Content\images\dossier6\im_7.jpeg" />
+    <Content Include="Content\images\dossier6\im_8.jpeg" />
+    <Content Include="Content\images\dossier6\im_9.jpeg" />
     <Content Include="Content\images\event-1.jpg" />
     <Content Include="Content\images\event-2.jpg" />
     <Content Include="Content\images\event-3.jpg" />
@@ -604,6 +616,7 @@
     <Content Include="Views\Home\remise_moto.cshtml" />
     <Content Include="Views\Home\table_banc.cshtml" />
     <Content Include="Views\Home\kit_scolaire.cshtml" />
+    <Content Include="Views\Home\latrine_publique_badu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
