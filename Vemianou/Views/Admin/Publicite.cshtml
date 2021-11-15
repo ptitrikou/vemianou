@@ -1,0 +1,167 @@
+﻿@using CristalPalace.Models
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Publicite";
+    @@params par = ViewBag.par;
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-blue">Publicite</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Acceuil</a></li>
+                    <li class="breadcrumb-item active">publicite</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Informations article</h3>
+                        <div class="row float-right">
+                            <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-update">Modifier les information</a>
+                        </div>
+                        
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-lg-2 col-md-2">
+                                <label>Titre</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <input type="text" class="form-control" value="@par.p21" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-lg-2 col-md-2">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <input type="text" class="form-control" value="@par.p22" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-lg-2 col-md-2">
+                                <label>Contenu</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <textarea type="text" class="form-control">@par.p23</textarea>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="container-fluid">
+                            <img src="~/Content/images/@par.p24" class="img-responsive img-fluid w-100" />
+                        </div>
+                        <hr />
+                        <div class="row float-right">
+                            <a href="#" class="btn btn-success" onclick="updateImageCategorie(@par.IDparams,'@par.p24')">Modifier l'image</a>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- /.container-fluid -->
+</section>
+<div class="modal fade" id="modal-update">
+    <div class="modal-dialog modal-lg">
+
+        <div Class="modal-content">
+            <div Class="modal-header">
+                <h4 Class="modal-title" id="lib">Modification</h4>
+                <Button type="button" Class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </Button>
+            </div>
+            <div Class="modal-body">
+                <form action="@Url.Action("updatePub","Admin")" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="IDparams" value="@par.IDparams" hidden />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="p21" value="@par.p21" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="p22" value="@par.p22" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="p23" value="@par.p23" required />
+                    </div>
+                    <div class="row-fluid float-right">
+                        <Button type="button" Class="btn btn-danger mr-2" data-dismiss="modal">Fermer</Button>
+                        <Button type="submit" Class="btn btn-success">Valider</Button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="update-image">
+    <div class="modal-dialog modal-lg">
+
+        <div Class="modal-content">
+            <div Class="modal-header">
+                <h4 Class="modal-title" id="lib">Nouvelle image <span id="nlib"></span></h4>
+                <Button type="button" Class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </Button>
+            </div>
+            <div Class="modal-body">
+                <form action="@Url.Action("updatePubImage","Admin")" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="text" id="idcat2" class="form-control" name="id" required hidden />
+                        <input type="text" id="olim" class="form-control" name="oldimage" hidden />
+                        <input type="file" id="image" class="form-control" name="file1" accept="image/*" required />
+                    </div>
+                    <div class="row-fluid float-right">
+                        <Button type="button" Class="btn btn-danger mr-2" data-dismiss="modal">Fermer</Button>
+                        <Button type="submit" Class="btn btn-success">Valider</Button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.content -->
+@section scripts{
+    <script>
+        function updateImageCategorie(id,oldimage) {
+            $("#idcat2").val(id);
+            $("#olim").val(oldimage);
+            $('#update-image').modal('show');
+        }
+
+    </script>
+}
+
+
+
+

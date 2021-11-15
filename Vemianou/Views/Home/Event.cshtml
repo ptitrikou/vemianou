@@ -1,6 +1,10 @@
-﻿
+﻿@using Vemianou.ViewsModels
+@model List<EvenementViewModel>
 @{
     ViewBag.Title = "Evenements";
+    int n = ViewBag.n;
+    int nombre = ViewBag.nombre;
+    int total = ViewBag.total;
 }
 
 <div class="hero-wrap" style="background-image: url('/Content/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
@@ -9,7 +13,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                 <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Acceuil</a></span> <span>Actions</span></p>
-                <h1 class="mb-3 bread "  data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Actions</h1>
+                <h1 class="mb-3 bread " data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Actions</h1>
             </div>
         </div>
     </div>
@@ -19,106 +23,58 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 d-flex ftco-animate">
+            @foreach(EvenementViewModel ev in Model)
+            {
+                <div class="col-md-4 d-flex ftco-animate">
                 <div class="blog-entry align-self-stretch">
                     <a href="@Url.Action("DetailsBlog","Home",new { num=5})" class="block-20" style="background-image: url('/Content/images/dossier6/im_4.jpeg');">
                     </a>
                     <div class="text p-4 d-block">
                         <div class="meta mb-3">
-                            <div><a href="#">Mars.2, 2021</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
+                            <div><a href="#">@ev.dateevent</a></div>                  
                         </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=5})">Don de latrine publique Badu</a></h3>
+                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsEvenement","Home",new {iditem = ev.iditem})">@ev.designation</a></h3>
                         @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>L'association a fait un don de latrine publique à Badou toilettes, labavo etc...</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=5})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
+                        <p>@ev.description.</p>
+                        <p><a href="@Url.Action("DetailsEvenement","Home",new {iditem = ev.iditem})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=2})" class="block-20" style="background-image: url('/Content/images/dossier4/DSC_0068.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 10, 2018</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=2})">Remise de table banc Aneho</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Remise de table banc au lycée technique de glidji pour pallier au problème de table banc .</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=2})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=3})" class="block-20" style="background-image: url('/Content/images/dossier3/IMG_8069.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Oct. 10, 2019</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=3})">Dons de moto Glidji</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Dons de moto aux jeunes de Glidji pour l'entreprenariat et  une reinsertion sociale .</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=3})">Afficher <i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=1})" class="block-20" style="background-image: url('/Content/images/dossier1/IMG_0284.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 10, 2016</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=1})">Journée nationale de l'arbre</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Cette journée dédiée à la protection des arbres et de l'environnement est aussi placée sous le signe de la lutte contre l'érosion côtière.</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=1})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=4})" class="block-20" style="background-image: url('/Content/images/dossier2/DSC_0306.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 10, 2017</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=4})">Dons de kit scolaire</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Remise de kit scolaire au lycée technique de glidji.</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=4})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
+            }
+           
 
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
-                    </ul>
-                </div>
+                @if (n > 1)
+                {
+                    <div class="block-27">
+                        <ul>
+                            @if (nombre >= 2)
+                            {
+                                <li><a href="@Url.Action("Index","Evenement",new { nb = nombre - 1})">&lt;</a></li>
+                            }
+                            @for (int i = 0; i < n; i++)
+                            {
+
+                                if (i == (nombre - 1))
+                                {
+                                    <li class="active"><span>@(i + 1)</span></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Index","Evenement",new { nb = nombre + 1})">@(i + 1)</a></li>
+                                }
+                            }
+                            @if (nombre < n)
+                            {
+                                <li><a class="mdi mdi-chevron-double-right" href="@Url.Action("Index","Evenement",new { nb = nombre + 1})">&gt;</a></li>
+                            }
+                        </ul>
+                    </div>
+                    
+                }
+              
             </div>
         </div>
     </div>

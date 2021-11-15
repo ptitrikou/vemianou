@@ -1,0 +1,140 @@
+﻿@using Vemianou.ViewsModels
+@model List<EvenementViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Evenementiel";
+    int typ = 1;
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-blue">Liste des publications</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Acceuil</a></li>
+                    <li class="breadcrumb-item active">Liste des publicationss</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid float-right mb-2">
+
+    </div>
+    <br />
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Liste des evenements</h3>
+                        <div class="row float-right">
+                            <a href="@Url.Action("NouveauEvenement")" class="btn btn-success">Nouveau</a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="overflow-x:auto">
+
+                        <table id="example" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Image</th>
+                                    <th>Designation</th>
+                                    <th>Description</th>
+                                    <th>Date de publication</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count > 0)
+                                {
+                                    foreach (EvenementViewModel vent in Model)
+                                    {
+                                        <tr>
+                                            <td>@(Model.IndexOf(vent) + 1)</td>
+                                            <td>@vent.dateevent</td>
+                                            <td><img src="~/Content/images/@vent.imagepath" style="height:70px;width:auto" alt=""></td>
+                                            <td>@vent.designation</td>
+                                            <td>@vent.description</td>
+                                            <td>@vent.datepublish</td>
+                                           
+                                            <td width="10px">
+                                                <a href="@Url.Action("showItem","Admin",new {id=vent.iditem,type=2})" onclick=""><i class="fas fa-edit blue" style="color:#0069d9"></i></a>
+                                                <a href="#" onclick="deleteArticle(@vent.iditem,@typ)"><i class="fa fa-trash blue" style="color:#0069d9"></i></a>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="9"> <h5>Aucune publication enregistrée !</h5></td>
+                                    </tr>
+
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- /.container-fluid -->
+</section>
+
+
+<!-- /.content -->
+@section scripts{
+    <script>
+        function deleteArticle(id,type) {
+            Swal.fire({
+                title: 'Etes-vous sur?',
+                text: "Voulez-vous vraiment supprimer cet evenement ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui',
+                cancelButtonText: 'Non'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = "/Admin/deleteItem?id=" + id +"&type=" + type;
+                }
+            })
+        }
+
+        function updateCategorie(id, nom) {
+
+            $("#idcat").val(id);
+            $("#nomcat").val(nom);
+            $('#update-categorie').modal('show');
+        }
+
+    </script>
+}
+
+
+
+
+

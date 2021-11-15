@@ -1,0 +1,129 @@
+﻿
+@using Vemianou.Models;
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Administrateurs";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-blue">Liste des administrateurs</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Acceuil</a></li>
+                    <li class="breadcrumb-item active">Administrateurs</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid float-right mb-2">
+
+    </div>
+    <br />
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Liste des administrateurs</h3>
+                        <div class="row float-right d-none">
+                            <buton class="btn btn-primary" data-toggle="modal" data-target="#modal-categorie">Nouvelle famille de service</buton>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="overflow-x:auto">
+                        <table id="example" class="table table-bordered table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>Nom et prenoms </th>
+                                    <th>Email</th>
+                                    <th>Adresse</th>
+                                    <th>Login</th>
+                                    <th>Telephone</th>
+                                    <th>Telephone2</th>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count > 0)
+                                {
+                                    foreach (USER us in Model)
+                                    {
+
+                                        <tr>
+                                            <td>@us.nomprenomsuser</td>
+                                            <td>@us.email</td>
+                                            <td>@us.adressuser</td>
+                                            <td>@us.loginuser</td>
+                                            <td>@($"{us.indicatifuser} {us.teluser}")</td>
+                                            <td>@($"{us.indicatifuser} {us.details1}")</td>
+                                            <td width="10px"> <a href="@Url.Action("infocompte","Admin",new { iduser = us.iduser})"><i class="fas fa-edit blue" style="color:#0069d9"></i></a></td>
+                                            <td width="10px"> <a href="#" onclick="deleteUser(@us.iduser)"><i class="fa fa-trash blue" style="color:#0069d9"></i></a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6"> <h5></h5></td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- /.container-fluid -->
+</section>
+
+<!-- /.content -->
+@section scripts{
+    <script>
+        function deleteUser(id) {
+            Swal.fire({
+                title: 'Etes-vous sur?',
+                text: "Voulez-vous vraiment supprimer cette catégorie ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui',
+                cancelButtonText: 'Non'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = "/Admin/DeleteAdmin?idadmin=" + id;
+                }
+            })
+        }
+
+        function updateUser(id) {
+            window.location.href = "/Admin/infocompte?idadmin=" + id;
+        }
+
+    </script>
+}
+
+
+
+
+

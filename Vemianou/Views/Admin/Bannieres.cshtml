@@ -1,0 +1,161 @@
+﻿@using Vemianou.Models;
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Bannieres";
+    List<item> listBannieres = ViewBag.bannieres;
+    List<item> listArticles = ViewBag.articles;
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-blue">Liste des bannieres</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Home</a></li>
+                    <li class="breadcrumb-item active">Liste des bannieres</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid float-right mb-2">
+
+    </div>
+    <br />
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Liste des bannieres</h3>
+                        <div class="row float-right">
+                            <a href="#" class="btn btn-success" onclick="addBanniere()">Ajouter un article</a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        <table id="example" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Article</th>
+
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (listBannieres.Count > 0)
+                                {
+                                    foreach (item it in listBannieres)
+                                    {
+                                        <tr>
+
+                                            <td>@(listBannieres.IndexOf(it) + 1)</td>
+                                            <td>@it.designation</td>
+
+                                            <td width="10px"> <a href="#" onclick="deleteBanniere(@it.iditem)"><i class="fa fa-trash blue" style="color:#0069d9"></i></a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3"> <h6>Aucun article enregistrée !</h6></td>
+                                    </tr>
+
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- /.container-fluid -->
+</section>
+<div class="modal fade" id="modal-nouveaute">
+    <div class="modal-dialog modal-lg">
+
+        <div Class="modal-content">
+            <div Class="modal-header">
+                <h5 Class="modal-title" id="lib">Ajouter une banniere</h5>
+                <Button type="button" Class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </Button>
+            </div>
+            <div Class="modal-body">
+                <form action="@Url.Action("addBanniere","Admin")" method="POST">
+                    <div class="form-group">
+                        <p>Selectionnez un article</p>
+                        <select name="id" class="form-control">
+                            @foreach (item it in listArticles)
+                            {
+                                <option value="@it.iditem">@it.designation</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="row-fluid float-right">
+                        <Button type="button" Class="btn btn-danger mr-2" data-dismiss="modal">Fermer</Button>
+                        <Button type="submit" Class="btn btn-primary">Valider</Button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- /.content -->
+@section scripts{
+    <script>
+        function deleteBanniere(id) {
+            Swal.fire({
+                title: 'Etes-vous sur?',
+                text: "Voulez-vous vraiment supprimer ce article des bannieres ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui',
+                cancelButtonText: 'Non'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = "/Admin/deleteBanniere?id=" + id;
+                }
+            })
+        }
+
+        function updateCategorie(id, nom) {
+
+            $("#idcat").val(id);
+            $("#nomcat").val(nom);
+            $('#update-categorie').modal('show');
+        }
+
+        function addBanniere() {
+            $('#modal-nouveaute').modal('show');
+        }
+
+    </script>
+}

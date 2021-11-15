@@ -1,0 +1,103 @@
+﻿@using Vemianou.Models;
+@model List<MenuDuJourViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "menu du jour";
+    SelectList listemenu = ViewBag.listemenu;
+}
+  <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <!-- Left col -->
+              <div class="container-fluid mt-3">
+                  <h3 class="m-0 text-blue mb-4">Menus du jour </h3>
+                  <div class="card">
+                      <div class="card-header">
+                          <h3 class="card-title">
+                              <i class="ion ion-clipboard mr-1"></i>
+                              Menus du jour enregistrés
+                          </h3>
+                          <button class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Nouveau</button>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                          <table id="example" class="table table-bordered table-striped  dtr-inline">
+                              <thead class="bg-gradient-blue text-white">
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Date </th>
+                                      <th>Menu</th>
+                                      <th>Image</th>
+                                      <th>Date d'enregistrement</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @if (Model.Count > 0)
+                                  {
+                                      foreach (MenuDuJourViewModel mn in Model)
+                                      {
+                                          <tr>
+                                              <td class="text-blue">@(Model.IndexOf(mn) + 1)</td>
+                                              <td><small class="badge badge-success">@mn.date</small></td>
+                                              <td>@mn.designation</td>
+                                              <td><image src="/Content/images/@mn.lienimage" style="max-width:50px;height:auto" class="img-rounded"/></td>
+                                              <td>@mn.dateenr</td>
+                                              <td><a href="@Url.Action("DeleteMenuDuJour","Menu")"><i class="fa fa-delete text-danger" onclick="editmenu(@mn.iditem)"></i></a></td>
+                                          </tr>
+                                      }
+                                  }
+                                  else
+                                  {
+                                      <tr>
+                                          <td colspan="9"> <h5>Aucun Menu enregistrée !</h5></td>
+                                      </tr>
+                                  }
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+
+                  <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+                      <div class="modal-dialog" role="document">
+                          <form action="@Url.Action("MenuDuJour","Admin")" method="POST">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title">Nouveau menu</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <div class="form-group">
+                                          <label>Date</label>
+                                          <input type="date" class="form-control"  name="date" min="@ViewBag.dateactu" value="@ViewBag.dateactu" />
+                                      </div>
+                                      <div class="form-group">
+                                          <label>Menu</label>
+                                          @Html.DropDownList("iditem", listemenu, new { @class = "form-control", @required = "true" })
+                                      </div>
+                                  </div>
+                                 <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                      <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+
+              </div>
+              <!-- /.Left col -->
+
+          </div>
+      </div>
+  </section>
+  @section Scripts{
+      <script>
+            function editmenu(iditem) {
+                $("#iditem").val(iditem);
+                $("#exampleModel").modal('show');
+            }
+      </script>
+  }
