@@ -13,6 +13,21 @@ namespace Vemianou.Controllers
         ItemService itemService = new ItemService();
         public ActionResult Index()
         {
+            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<ITEM> evenements = itemService.listeArticle("publication",3).OrderByDescending(i => i.iditem).ToList();
+            
+            foreach (ITEM it in evenements)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                vent.description = it.designdetails;
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels.Add(vent);
+            }
+            ViewBag.evenements = eventsviewmodels;
             return View();
         }
 

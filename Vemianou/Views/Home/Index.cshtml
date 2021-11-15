@@ -1,5 +1,8 @@
-﻿@{
+﻿@using Vemianou.ViewsModels
+
+@{
     ViewBag.Title = "Index";
+    List<EvenementViewModel> liste = ViewBag.evenements;
 }
 <div class="hero-wrap" style="background-image: url('/Content/images/bg_7.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -8,7 +11,7 @@
             <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                 <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Nous oeuvrons pour l'épanouissement des populations vulnérables</h1>
 
-               @*<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="https://vimeo.com/45830194" class="btn btn-white btn-outline-white px-4 py-3 popup-vimeo"><span class="icon-play mr-2"></span>Watch Video</a></p>*@
+                @*<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="https://vimeo.com/45830194" class="btn btn-white btn-outline-white px-4 py-3 popup-vimeo"><span class="icon-play mr-2"></span>Watch Video</a></p>*@
             </div>
         </div>
     </div>
@@ -48,23 +51,23 @@
 </section>
 
 @*<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center  pb-3">
-            <div class="col-md-7 heading-section ftco-animate text-center">
-                <h2 class="mb-4">Notre mission</h2>
-                <p>L'association VEMIANOU  est une association à but non lucréatif dont la mission est la suivante</p>
+        <div class="container">
+            <div class="row justify-content-center  pb-3">
+                <div class="col-md-7 heading-section ftco-animate text-center">
+                    <h2 class="mb-4">Notre mission</h2>
+                    <p>L'association VEMIANOU  est une association à but non lucréatif dont la mission est la suivante</p>
 
-            </div>
-            <div class="col-md-10 heading-section ftco-animate text-center">
-                <p>
-                    La raison d'être de Vemianou, c'est de mobiliser et rassembler les ressources nécessaires afin de contribuer au développement des couches vulnérables de la population et d'améliorer les conditions de vie des personnes en situation de précarité"
-                </p>
+                </div>
+                <div class="col-md-10 heading-section ftco-animate text-center">
+                    <p>
+                        La raison d'être de Vemianou, c'est de mobiliser et rassembler les ressources nécessaires afin de contribuer au développement des couches vulnérables de la population et d'améliorer les conditions de vie des personnes en situation de précarité"
+                    </p>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
-</section>*@
+    </section>*@
 
 <section class="ftco-section bg-light">
     <div class="row justify-content-center mb-5 pb-3">
@@ -75,63 +78,32 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=5})" class="block-20" style="background-image: url('/Content/images/dossier6/im_4.jpeg');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Mars.2, 2021</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
+            @foreach (EvenementViewModel ev in liste)
+            {
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry align-self-stretch">
+                        <a href="@Url.Action("DetailsEvenement","Home",new { iditem=ev.iditem})" class="block-20" style="background-image: url('/Content/images/dossier6/im_4.jpeg');">
+                        </a>
+                        <div class="text p-4 d-block">
+                            <div class="meta mb-3">
+                                <div><a href="#">@ev.dateevent</a></div>                        
+                            </div>
+                            <h3 class="heading mb-4"><a href="@Url.Action("DetailsEvenement","Home",new { iditem=ev.iditem})">@ev.designation</a></h3>
+                            @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
+                            <p>@ev.description</p>
+                            <p><a href="@Url.Action("DetailsEvenement","Home",new { iditem=ev.iditem})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
                         </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=5})">Don de latrine publique Badu</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>L'association a fait un don de latrine publique à Badou toilettes, labavo etc...</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=5})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new {num=2 })" class="block-20" style="background-image: url('/Content/images/dossier4/DSC_0068.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 10, 2018</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=2})">Remise de table banc Aneho</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Remise de table banc au lycée technique de glidji pour pallier au problème de table banc .</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=2})">Afficher<i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="@Url.Action("DetailsBlog","Home",new { num=3})" class="block-20" style="background-image: url('/Content/images/dossier3/IMG_8069.JPG');">
-                    </a>
-                    <div class="text p-4 d-block">
-                        <div class="meta mb-3">
-                            <div><a href="#">Oct. 10, 2019</a></div>
-                            @*<div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>*@
-                        </div>
-                        <h3 class="heading mb-4"><a href="@Url.Action("DetailsBlog","Home",new { num=3})">Dons de moto Glidji</a></h3>
-                        @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
-                        <p>Dons de moto aux jeunes de Glidji pour l'entreprenariat et  une reinsertion sociale .</p>
-                        <p><a href="@Url.Action("DetailsBlog","Home",new { num=3})">Afficher <i class="ion-ios-arrow-forward"></i></a></p>
-                    </div>
-                </div>
-            </div>
+            }
+
+           
 
 
         </div>
-       
+
     </div>
-    
+
 </section>
 <section class="ftco-section">
     <div class="container">
@@ -150,7 +122,7 @@
                             <h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
                             <span class="position">11/10/2019</span>
                             <div class="text">
-                                <p><span>300FCFA</span><br/> <a href="#">Remise de table bancs</a></p>
+                                <p><span>300FCFA</span><br /> <a href="#">Remise de table bancs</a></p>
                             </div>
                         </div>
                     </div>
@@ -296,10 +268,10 @@
                     </a>
                     <div class="text p-4 d-block">
                         @*<div class="meta mb-3">
-                        <div><a href="#">Sep. 10, 2018</a></div>
-                        <div><a href="#">Admin</a></div>
-                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>*@
+                            <div><a href="#">Sep. 10, 2018</a></div>
+                            <div><a href="#">Admin</a></div>
+                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                            </div>*@
                         <h3 class="heading mb-4"><a href="#">Projet d'équipement numérique au bénefice d'écoles du Togo pour réduire la fracture numérique</a></h3>
                         @*<p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> 10:30AM-03:30PM</span> <span><i class="icon-map-o"></i> Venue Main Campus</span></p>*@
                         <p>
@@ -310,7 +282,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
@@ -324,7 +296,7 @@
             </div>
             <div class="col-md-6 volunteer pl-md-5 ftco-animate">
                 <h3 class="mb-3">Devenir un volontaire</h3>
-                <form action="@Url.Action("saveContact","Home")" method="POST"  class="volunter-form">
+                <form action="@Url.Action("saveContact","Home")" method="POST" class="volunter-form">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Votre nom" required>
                     </div>
