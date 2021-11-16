@@ -1,6 +1,5 @@
-﻿
-@using Vemianou.Models;
-@model ITEM;
+﻿@using Vemianou.Models;
+@model ITEM
 @{
     ViewBag.Title = "Modification";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -89,11 +88,11 @@
                                     <label>Date</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="date"  class="form-control" value="@Model.datpromo1.ToString("yyyy-MM-dd")" name="datpromo1" />
+                                    <input type="date" class="form-control" value="@Model.datpromo1.ToString("yyyy-MM-dd")" name="datpromo1" />
                                     @Html.ValidationMessageFor(model => model.datpromo1, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                          
+
                             <div class="row mb-2">
                                 <div class="col-lg-3 col-md-3">
                                     <label>Ordre</label>

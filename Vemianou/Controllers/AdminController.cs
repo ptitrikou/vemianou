@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 public class AdminController : Controller
     {
         SousFamilleService categorieService = new SousFamilleService();
@@ -29,6 +30,8 @@ public class AdminController : Controller
         public ActionResult ListeAdministrateurs()
         {
             List<USER> users = db.USER.Where(u => u.typuser == 1).ToList();
+            USER us = Session["user"] as USER;
+            ViewBag.typeuser = us.typuser;
             return View("Administrateurs",users);
         }
         public ActionResult DeleteAdmin(int idadmin)
@@ -475,6 +478,23 @@ public class AdminController : Controller
            
         }
         //liste des articles
+        public ActionResult NouveauCompte(string nomuser,string prenomuser,string loginuser,string passuser)
+        {
+            USER us = new USER();
+            us.nomuser = nomuser;
+            us.prenomsuser = prenomuser;
+            us.nomprenomsuser = nomuser + prenomuser;
+            us.loginuser = loginuser;
+            us.passeuser = passuser;
+            us.email="Aucun";
+            us.teluser = "Aucun";
+            us.adressuser = "Aucun";
+            us.sexeuser = 0;
+            userService.addUser(us);
+            
+            TempData["success"] = "Compte enregistré avec succès !";
+            return RedirectToAction("ListeAdministrateurs");
+        }
         public ActionResult listeMenus()
         {
            

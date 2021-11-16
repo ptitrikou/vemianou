@@ -27,7 +27,7 @@ namespace Vemianou.Models
         [StringLength(255)]
         public string designation { get; set; }
 
-        [StringLength(255)]
+        
         public string designdetails { get; set; }
 
         [StringLength(255)]
