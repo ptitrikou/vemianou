@@ -7,6 +7,7 @@ namespace Vemianou.Models
     using System.Data.Entity.Spatial;
 
     [Table("USER")]
+    [Serializable]
     public partial class USER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
