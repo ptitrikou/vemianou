@@ -36,22 +36,42 @@ public class ItemService
             List<ITEM>listitem = new List<ITEM>();
             if (n == 0)
             {
-                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille).OrderByDescending(i => i.ordre1).ToList();
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
 
             }
             else
             {
                 try{
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
                 }
                 catch (Exception){
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem).OrderByDescending(i => i.ordre1).ToList();
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
                 }
             }
 
              return listitem;
         }
 
+        public List<ITEM> EvenementsFuturs(string famille, int n = 0, int iditem = 0)
+        {
+            List<ITEM>listitem = new List<ITEM>();
+            if (n == 0)
+            {
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 >= DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+
+            }
+            else
+            {
+                try{
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 >= DateTime.Now).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                }
+                catch (Exception){
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 > DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+                }
+            }
+
+            return listitem;
+        }
        
         public List<ITEM> promotions()
         {

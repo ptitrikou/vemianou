@@ -26,6 +26,7 @@ namespace Vemianou.Models
 
         public string designation { get; set; }
 
+
         public string designdetails { get; set; }
 
         public string designdetails2 { get; set; }

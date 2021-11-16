@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewBag.Title | Admin Cristal Palace</title>
+    <title>@ViewBag.Title | Admin Vemianou</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -36,10 +36,12 @@
     <!-- Daterange picker -->
     @Styles.Render("~/Content/admin/plugins/daterangepicker/daterangepicker.css")
     @Styles.Render("~/Content/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")
+    <!-- trumbowyg-->
+    @Styles.Render("~/Content/trumbowyg/dist/ui/trumbowyg.min.css")
+    @Styles.Render("~/Content/trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.min.css")
     <!-- jQuery -->
     @Scripts.Render("~/Content/admin/plugins/jquery/jquery.min.js")
     @Scripts.Render("~/Content/admin/plugins/jquery-ui/jquery-ui.min.js")
-
 
     <!-- SweetAlert2 -->
     @Scripts.Render("~/Content/admin/plugins/sweetalert2/sweetalert2.min.js")
@@ -93,7 +95,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">@user.nomprenomsuser</a>
-                        
+
                     </div>
                 </div>
 
@@ -238,11 +240,13 @@
     <!-- bs-custom-file-input -->
     @Scripts.Render("~/Content/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js")
 
-
+    @Scripts.Render("~/Content/trumbowyg/dist/trumbowyg.min.js")
+    @Scripts.Render("~/Content/trumbowyg/dist/langs/fr.min.js")
+    @Scripts.Render("~/Content/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js")
 
     <script>
         $(function () {
-            (function() {
+
             if ('@TempData["mescat"]' != "") {
                 Swal.fire('','@TempData["mescat"]', 'success')
             }
@@ -270,7 +274,7 @@
             if ('@TempData["error"]' != "") {
                 Swal.fire('','@TempData["error"]', 'error')
             }
-        })();
+
         });
         $(function () {
             $('#example').DataTable({

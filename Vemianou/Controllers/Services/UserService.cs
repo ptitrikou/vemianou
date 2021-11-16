@@ -40,7 +40,7 @@ using System.Web;
                     usr.details3 = "aucun";
                     usr.idville = 0;
                     usr.idpays = 0;
-                    usr.typuser = 0;
+                    usr.typuser = 2;
                     usr.typuser2 = 0;
                     usr.indicatifuser = "+228";
                     usr.loginuser = us.loginuser;

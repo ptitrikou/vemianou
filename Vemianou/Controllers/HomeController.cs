@@ -14,26 +14,75 @@ namespace Vemianou.Controllers
         public ActionResult Index()
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<EvenementViewModel> eventsviewmodels2 = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication",3).OrderByDescending(i => i.iditem).ToList();
-            
+            List<ITEM> evenementsfuturs = itemService.EvenementsFuturs("publication", 3).OrderByDescending(i => i.iditem).ToList();
             foreach (ITEM it in evenements)
             {
                 EvenementViewModel vent = new EvenementViewModel();
                 vent.iditem = it.iditem;
                 vent.designation = it.designation;
-                vent.description = it.designdetails;
+                try{
+                    vent.description = it.designdetails.Substring(0,100) + "...";
+                }
+                catch (ArgumentOutOfRangeException){
+                    vent.description = it.designdetails ;
+                }
+                
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels.Add(vent);
+            }
+            foreach (ITEM it in evenementsfuturs)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                try
+                {
+                    vent.description = it.designdetails.Substring(0, 100) + "...";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    vent.description = it.designdetails;
+                }
+
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels2.Add(vent);
+            }
+            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenementsfutur = eventsviewmodels2;
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
+
+            foreach (ITEM it in evenements)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                try
+                {
+                    vent.description = it.designdetails.Substring(0, 100) + "...";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    vent.description = it.designdetails;
+                }
+
                 vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
                 vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
             ViewBag.evenements = eventsviewmodels;
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -47,7 +96,29 @@ namespace Vemianou.Controllers
         }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
+
+            foreach (ITEM it in evenements)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                try
+                {
+                    vent.description = it.designdetails.Substring(0, 100) + "...";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    vent.description = it.designdetails;
+                }
+
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels.Add(vent);
+            }
+            ViewBag.evenements = eventsviewmodels;
 
             return View();
         }
@@ -109,7 +180,15 @@ namespace Vemianou.Controllers
                 eventsviewmodels.Add(vent);
             }
 
-            ViewBag.autres = eventsviewmodels;           
+            ViewBag.autres = eventsviewmodels;
+            try
+            {
+                ViewBag.evenements = eventsviewmodels.GetRange(0, 2);
+            }
+            catch (Exception)
+            {
+                ViewBag.evenements = eventsviewmodels;
+            }
             return View(eventviewmodel);
         }
         public ActionResult Event(int? cat, int? nb)
@@ -128,7 +207,11 @@ namespace Vemianou.Controllers
             //paginate
             total = evenements.Count;
             double val = total / 5;
-            n = (int)Math.Ceiling(val) + 1;
+            if((val % 1) == 0){
+                n = (int)val;
+            }else{
+                n = (int)Math.Ceiling(val) + 1;
+            }           
             if (nb == null)
                 nb = 1;
             nombre = (int)nb;
@@ -171,11 +254,40 @@ namespace Vemianou.Controllers
             ViewBag.nombre = nombre;
             ViewBag.total = total;
             ViewBag.n = n;
-
+            try{
+                ViewBag.evenements = eventsviewmodels.GetRange(0, 2);
+            }
+            catch (Exception){
+                ViewBag.evenements = eventsviewmodels;
+            }
+            
             return View(eventsviewmodels);
         }
         public ActionResult Galleries()
         {
+            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
+
+            foreach (ITEM it in evenements)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                try
+                {
+                    vent.description = it.designdetails.Substring(0, 100) + "...";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    vent.description = it.designdetails;
+                }
+
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels.Add(vent);
+            }
+            ViewBag.evenements = eventsviewmodels;
             return View();
         }
         

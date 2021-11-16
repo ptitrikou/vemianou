@@ -6,10 +6,13 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Vemianou.ViewsModels;
+using System;
 
 public class UserController : Controller
     {
         UserService userService = new UserService();
+        ItemService itemService = new ItemService();
+
         ModelVemianou db = new ModelVemianou();    
         NumberFormatInfo numf = new CultureInfo("fr-FR", false).NumberFormat;
         // GET: User
@@ -19,7 +22,31 @@ public class UserController : Controller
         }
         public ActionResult Login()
         {
+            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
+
+            foreach (ITEM it in evenements)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                try
+                {
+                    vent.description = it.designdetails.Substring(0, 100) + "...";
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    vent.description = it.designdetails;
+                }
+
+                vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels.Add(vent);
+            }
+            ViewBag.evenements = eventsviewmodels;
             return View("~/Views/Home/Login.cshtml");
+            
         }
 
     [HttpPost()]
@@ -78,11 +105,7 @@ public class UserController : Controller
         public ActionResult Logout(){
             
             Session["user"] = null;
-            Session["panier"] = null;
-            Session["total"] = null;
-            Session["cmde"] = null;
-            Session["reserv"] = null;
-
+           
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
@@ -100,7 +123,8 @@ public class UserController : Controller
             }
             return RedirectToAction("infocompte","Admin",new { iduser = r});
         }
-
+     
+      
        public ActionResult MesCommandes()
         {
             USER us = Session["user"] as USER;
