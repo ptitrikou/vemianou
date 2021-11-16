@@ -80,7 +80,7 @@
                 <div class="col-md-4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Evenements récents</h2>
-                        @foreach (EvenementViewModel ev in ViewBag.evenements as List<EvenementViewModel>)
+                        @*@foreach (EvenementViewModel ev in ViewBag.evenements as List<EvenementViewModel>)
                         {
                             <div class="block-21 mb-4 d-flex">
                                 <a class="blog-img mr-4" style="background-image: url(/Content/images/@(ev.imagepath));"></a>
@@ -91,11 +91,11 @@
                                     </div>
                                 </div>
                             </div>
-                        }
-                        @*<div class="block-21 mb-4 d-flex">
+                        }*@
+                        <div class="block-21 mb-4 d-flex">
                                 <a class="blog-img mr-4" style="background-image: url(/Content/images/dossier33/IMG_8069.JPG);"></a>
                                 <div class="text">
-                                    <h3 class="heading"><a href="@Url.Action("DetailsBlog","Home",new { num=3})">Remise de moto Glidji</a></h3>
+                                    <h3 class="heading"><a href="@Url.Action("Event","Home")">Remise de moto Glidji</a></h3>
                                     <div class="meta">
                                         <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
                                     </div>
@@ -104,13 +104,13 @@
                             <div class="block-21 mb-4 d-flex">
                                 <a class="blog-img mr-4" style="background-image: url(/Content/images/dossier44/DSC_0068.JPG);"></a>
                                 <div class="text">
-                                    <h3 class="heading"><a href="@Url.Action("DetailsBlog","Home",new {num=2})">Remise de table banc Aneho</a></h3>
+                                    <h3 class="heading"><a href="@Url.Action("Event","Home")">Remise de table banc Aneho</a></h3>
                                     <div class="meta">
                                         <div><a href="#"><span class="icon-calendar"></span>Sep. 10, 2018</a></div>
 
                                     </div>
                                 </div>
-                            </div>*@
+                            </div>
                     </div>
                 </div>
                 <div class="col-md-2">
