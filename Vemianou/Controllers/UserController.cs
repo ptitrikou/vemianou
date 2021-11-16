@@ -11,12 +11,9 @@ using System;
 public class UserController : Controller
     {
         UserService userService = new UserService();
-<<<<<<< HEAD
         ItemService itemService = new ItemService();
-        ModelCristal db = new ModelCristal();    
-=======
+
         ModelVemianou db = new ModelVemianou();    
->>>>>>> c84fb190ab388fc13e338813c3dade71de2c2646
         NumberFormatInfo numf = new CultureInfo("fr-FR", false).NumberFormat;
         // GET: User
         public ActionResult Index()

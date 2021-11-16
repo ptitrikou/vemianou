@@ -600,6 +600,7 @@ public class AdminController : Controller
         }
 
         [HttpPost]
+        [ValidateInput(false)]   
         public ActionResult updateItem(ITEM it)
         {
                 ITEM itm =db.ITEM.Find(it.iditem);
@@ -1022,6 +1023,7 @@ public class AdminController : Controller
         }
 
         [HttpPost]
+        [ValidateInput(false)]   
         public ActionResult NouveauEvenement(ITEM it)
         {
             string fileName, fileName2, fileName3, fileName4,fileName5,fileName6,fileName7,fileName8 ;

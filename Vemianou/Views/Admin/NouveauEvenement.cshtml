@@ -47,6 +47,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        
                         <form action="@Url.Action("NouveauEvenement","Admin")" method="POST" enctype="multipart/form-data">
                             <div class="row mb-2">
                                 <div class="col-lg-3 col-md-3">
@@ -73,9 +74,11 @@
                                 </div>
                                 <div class="col-lg-9 col-md-9">
                                     <small></small>
+                                    <div id="trumbowyg-demo"></div>
                                     <textarea class="form-control" name="designdetails2" rows="15" required></textarea>
                                     @Html.ValidationMessageFor(model => model.designdetails2, "", new { @class = "text-danger" })
                                 </div>
+                                
                             </div>
                           
                             <div class="row mb-2">
@@ -198,7 +201,11 @@
 </section>
 <!-- /.content -->
 @section scripts{
-
+    <script>
+        $('textarea').trumbowyg({
+            lang: 'fr'
+        });
+    </script>
 }
 
 

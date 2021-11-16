@@ -207,7 +207,11 @@ namespace Vemianou.Controllers
             //paginate
             total = evenements.Count;
             double val = total / 5;
-            n = (int)Math.Ceiling(val) + 1;
+            if((val % 1) == 0){
+                n = (int)val;
+            }else{
+                n = (int)Math.Ceiling(val) + 1;
+            }           
             if (nb == null)
                 nb = 1;
             nombre = (int)nb;

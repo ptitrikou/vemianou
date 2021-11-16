@@ -60,7 +60,7 @@
                         <ul>
                             @if (nombre >= 2)
                             {
-                                <li><a href="@Url.Action("Index","Evenement",new { nb = nombre - 1})">&lt;</a></li>
+                                <li><a href="@Url.Action("Event","Home",new {nb = nombre - 1})">&lt;</a></li>
                             }
                             @for (int i = 0; i < n; i++)
                             {
@@ -71,12 +71,12 @@
                                 }
                                 else
                                 {
-                                    <li><a href="@Url.Action("Index","Evenement",new { nb = nombre + 1})">@(i + 1)</a></li>
+                                    <li><a href="@Url.Action("Event","Home",new { nb = nombre + 1})">@(i + 1)</a></li>
                                 }
                             }
                             @if (nombre < n)
                             {
-                                <li><a class="mdi mdi-chevron-double-right" href="@Url.Action("Index","Evenement",new { nb = nombre + 1})">&gt;</a></li>
+                                <li><a class="mdi mdi-chevron-double-right" href="@Url.Action("Event","Home",new {nb = nombre + 1})">&gt;</a></li>
                             }
                         </ul>
                     </div>

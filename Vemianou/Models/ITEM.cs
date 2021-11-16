@@ -26,15 +26,9 @@ namespace Vemianou.Models
 
         public string designation { get; set; }
 
-<<<<<<< HEAD
-        
+
         public string designdetails { get; set; }
 
-        
-=======
-        public string designdetails { get; set; }
-
->>>>>>> c84fb190ab388fc13e338813c3dade71de2c2646
         public string designdetails2 { get; set; }
 
         public double prixitem { get; set; }

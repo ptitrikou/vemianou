@@ -36,10 +36,11 @@
     <!-- Daterange picker -->
     @Styles.Render("~/Content/admin/plugins/daterangepicker/daterangepicker.css")
     @Styles.Render("~/Content/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")
+   
+    @Styles.Render("~/Content/trumbowyg/dist/ui/trumbowyg.min.css")
     <!-- jQuery -->
     @Scripts.Render("~/Content/admin/plugins/jquery/jquery.min.js")
     @Scripts.Render("~/Content/admin/plugins/jquery-ui/jquery-ui.min.js")
-
 
     <!-- SweetAlert2 -->
     @Scripts.Render("~/Content/admin/plugins/sweetalert2/sweetalert2.min.js")
@@ -93,7 +94,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">@user.nomprenomsuser</a>
-                        
+
                     </div>
                 </div>
 
@@ -238,11 +239,12 @@
     <!-- bs-custom-file-input -->
     @Scripts.Render("~/Content/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js")
 
-
+    @Scripts.Render("~/Content/trumbowyg/dist/trumbowyg.min.js")
+    @Scripts.Render("~/Content/trumbowyg/dist/langs/fr.min.js")
 
     <script>
         $(function () {
-            (function() {
+
             if ('@TempData["mescat"]' != "") {
                 Swal.fire('','@TempData["mescat"]', 'success')
             }
@@ -270,7 +272,7 @@
             if ('@TempData["error"]' != "") {
                 Swal.fire('','@TempData["error"]', 'error')
             }
-        })();
+
         });
         $(function () {
             $('#example').DataTable({
