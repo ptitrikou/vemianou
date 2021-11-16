@@ -30,7 +30,7 @@ namespace Vemianou.Models
         
         public string designdetails { get; set; }
 
-        [StringLength(255)]
+        
         public string designdetails2 { get; set; }
 
         public double prixitem { get; set; }
