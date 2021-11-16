@@ -10,7 +10,7 @@ using Vemianou.ViewsModels;
 public class UserController : Controller
     {
         UserService userService = new UserService();
-        ModelCristal db = new ModelCristal();    
+        ModelVemianou db = new ModelVemianou();    
         NumberFormatInfo numf = new CultureInfo("fr-FR", false).NumberFormat;
         // GET: User
         public ActionResult Index()

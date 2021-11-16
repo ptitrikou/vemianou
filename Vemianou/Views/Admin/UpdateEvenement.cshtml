@@ -5,7 +5,7 @@
     ViewBag.Title = "Modification";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     List<SOUSFAMILL> listeCategorie = ViewBag.categories;
-    ModelCristal db = new ModelCristal();
+    ModelVemianou db = new ModelVemianou();
     SOUSFAMILL sf = db.SOUSFAMILL.Find(Model.iditem);
 }
 

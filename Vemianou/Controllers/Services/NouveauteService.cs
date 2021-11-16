@@ -6,7 +6,7 @@ using System.Linq;
 
     public class NouveauteService
     {
-        ModelCristal db = new ModelCristal();
+        ModelVemianou db = new ModelVemianou();
         public List<ITEM> listeNouveaute()
         {
             List<ITEM> listItem = new List<ITEM>();
