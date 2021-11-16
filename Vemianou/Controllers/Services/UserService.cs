@@ -8,7 +8,7 @@ using System.Web;
 
     public class UserService
     {
-        ModelCristal db = new ModelCristal();
+        ModelVemianou db = new ModelVemianou();
         public USER addUser(USER us)
         {
             USER u=null;            

@@ -24,13 +24,17 @@ namespace Vemianou.Models
         [Key]
         public int iditem { get; set; }
 
-        [StringLength(255)]
         public string designation { get; set; }
 
+<<<<<<< HEAD
         
         public string designdetails { get; set; }
 
         
+=======
+        public string designdetails { get; set; }
+
+>>>>>>> c84fb190ab388fc13e338813c3dade71de2c2646
         public string designdetails2 { get; set; }
 
         public double prixitem { get; set; }
@@ -96,7 +100,11 @@ namespace Vemianou.Models
 
         public string imagpath3 { get; set; }
 
-        public string imagpath4 { get; set; }
+        public byte[] imageitem { get; set; }
+
+        public byte[] imageitem2 { get; set; }
+
+        public byte[] imageitem3 { get; set; }
 
         public string imagpath5 { get; set; }
 
@@ -106,11 +114,7 @@ namespace Vemianou.Models
 
         public string imagpath8 { get; set; }
 
-        public byte[] imageitem { get; set; }
-
-        public byte[] imageitem2 { get; set; }
-
-        public byte[] imageitem3 { get; set; }
+        public string imagpath4 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABONNEMENT> ABONNEMENT { get; set; }

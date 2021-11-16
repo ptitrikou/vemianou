@@ -20,7 +20,7 @@ public class AdminController : Controller
         FamilleService familleService = new FamilleService();
         GroupfamillService groupfamilleService = new GroupfamillService();
         CommandeService commandeService = new CommandeService();
-        ModelCristal db = new ModelCristal();
+        ModelVemianou db = new ModelVemianou();
         // GET: Admin
         public ActionResult Index()
         {
@@ -925,52 +925,52 @@ public class AdminController : Controller
             return RedirectToAction("Index", "Admin");
         }
          
-        public ActionResult MenuDuJour()
-        {
-            List<MenuDuJourViewModel> menus = new List<MenuDuJourViewModel>();
-            List<ITEM>items = new List<ITEM>();
-            foreach(PARAMS pr in db.PARAMS.Where(p => p.libp.Equals("menu")).ToList())
-            {
-                MenuDuJourViewModel menudujour = new MenuDuJourViewModel();
-                ITEM it = itemService.getItem((int)pr.p1);
-                menudujour.iditem = it.iditem;
-                menudujour.designation = it.designation;
-                menudujour.description = it.designdetails;
-                if (it.tauxremiz != 0)
-                {
-                    menudujour.prix = it.prix2.ToString();
-                }
-                else
-                {
-                    menudujour.prix = it.prixitem.ToString();
-                }
-                menudujour.dateenr = ((DateTime)(pr.p40)).ToString("dd-MM-yyyy");
+        //public ActionResult MenuDuJour()
+        //{
+        //    List<MenuDuJourViewModel> menus = new List<MenuDuJourViewModel>();
+        //    List<ITEM>items = new List<ITEM>();
+        //    foreach(PARAMS pr in db.PARAMS.Where(p => p.libp.Equals("menu")).ToList())
+        //    {
+        //        MenuDuJourViewModel menudujour = new MenuDuJourViewModel();
+        //        ITEM it = itemService.getItem((int)pr.p1);
+        //        menudujour.iditem = it.iditem;
+        //        menudujour.designation = it.designation;
+        //        menudujour.description = it.designdetails;
+        //        if (it.tauxremiz != 0)
+        //        {
+        //            menudujour.prix = it.prix2.ToString();
+        //        }
+        //        else
+        //        {
+        //            menudujour.prix = it.prixitem.ToString();
+        //        }
+        //        menudujour.dateenr = ((DateTime)(pr.p40)).ToString("dd-MM-yyyy");
 
-                if(((DateTime)pr.p40 - DateTime.Now).TotalDays == 0) { 
-                   menudujour.date="Aujourd'hui";
-                   menudujour.stat = 1;
-                }else if(((DateTime)pr.p40 - DateTime.Now).TotalDays > 0){
-                   menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
-                   menudujour.stat = 2;
-                }
-                else {
-                   menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
-                   menudujour.stat = 0;
-                }
+        //        if(((DateTime)pr.p40 - DateTime.Now).TotalDays == 0) { 
+        //           menudujour.date="Aujourd'hui";
+        //           menudujour.stat = 1;
+        //        }else if(((DateTime)pr.p40 - DateTime.Now).TotalDays > 0){
+        //           menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
+        //           menudujour.stat = 2;
+        //        }
+        //        else {
+        //           menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
+        //           menudujour.stat = 0;
+        //        }
                
-                menudujour.lienimage = it.imagpath1;
-                menus.Add(menudujour);
-            }
+        //        menudujour.lienimage = it.imagpath1;
+        //        menus.Add(menudujour);
+        //    }
            
-            foreach (SOUSFAMILL sfm in sousFamilleService.listeCategorie("restauration"))
-            {
-                items.AddRange(sfm.ITEM);
-            }
+        //    foreach (SOUSFAMILL sfm in sousFamilleService.listeCategorie("restauration"))
+        //    {
+        //        items.AddRange(sfm.ITEM);
+        //    }
 
-            ViewBag.listemenu = new SelectList(items, "iditem", "designation");
-            ViewBag.dateactu = DateTime.Now.ToString("yyyy-MM-dd");
-            return View(menus);
-        }
+        //    ViewBag.listemenu = new SelectList(items, "iditem", "designation");
+        //    ViewBag.dateactu = DateTime.Now.ToString("yyyy-MM-dd");
+        //    return View(menus);
+        //}
         
         [HttpPost]
         public ActionResult MenuDuJour(DateTime date,int iditem)

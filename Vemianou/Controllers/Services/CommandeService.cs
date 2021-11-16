@@ -7,7 +7,7 @@ using System.Data.Entity;
 
     public class CommandeService
     {
-        ModelCristal db = new ModelCristal();
+        ModelVemianou db = new ModelVemianou();
         public List<VENTE> listeCommande()
         {
             List<VENTE> listeCommandes = db.VENTE.OrderByDescending(v => v.idvente).ToList();

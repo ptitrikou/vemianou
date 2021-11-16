@@ -1,14 +1,14 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Linq;
+
 namespace Vemianou.Models
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
-    public partial class ModelCristal : DbContext
+    public partial class ModelVemianou : DbContext
     {
-        public ModelCristal()
-            : base("name=ModelCristal")
+        public ModelVemianou()
+            : base("name=ModelVemianou")
         {
         }
 
@@ -234,10 +234,6 @@ namespace Vemianou.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<ITEM>()
-                .Property(e => e.imagpath4)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ITEM>()
                 .Property(e => e.imagpath5)
                 .IsUnicode(false);
 
@@ -251,6 +247,10 @@ namespace Vemianou.Models
 
             modelBuilder.Entity<ITEM>()
                 .Property(e => e.imagpath8)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ITEM>()
+                .Property(e => e.imagpath4)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ITEM>()

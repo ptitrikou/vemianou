@@ -7,7 +7,7 @@ using System.Linq;
 
 public class ItemService
     {
-         ModelCristal db = new ModelCristal();    
+         ModelVemianou db = new ModelVemianou();    
 
         public string addItem(ITEM it)
         {
@@ -321,14 +321,14 @@ public class ItemService
             return listItem;
         }
 
-        public PARAMS GetMenuDuJour()
-        {
-            MenuDuJourViewModel menudujour = new MenuDuJourViewModel();
-            DateTime dateactu = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            PARAMS pr = db.PARAMS.Where(p => p.libp.Equals("menu") && p.p41 == dateactu ).ToList().LastOrDefault();
-            if(pr == null){
-                pr = db.PARAMS.Where(p => p.libp.Equals("menu")).ToList().LastOrDefault();
-            }
-            return pr;
-        }
+        //public PARAMS GetMenuDuJour()
+        //{
+        //    MenuDuJourViewModel menudujour = new MenuDuJourViewModel();
+        //    DateTime dateactu = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        //    PARAMS pr = db.PARAMS.Where(p => p.libp.Equals("menu") && p.p41 == dateactu ).ToList().LastOrDefault();
+        //    if(pr == null){
+        //        pr = db.PARAMS.Where(p => p.libp.Equals("menu")).ToList().LastOrDefault();
+        //    }
+        //    return pr;
+        //}
     }
