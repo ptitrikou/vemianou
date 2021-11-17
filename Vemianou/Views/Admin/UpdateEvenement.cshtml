@@ -9,7 +9,6 @@
 }
 
 
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -49,7 +48,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="@Url.Action("updateItem","Admin")" method="POST" enctype="multipart/form-data">
+                        <form action="@Url.Action("updateItem","Admin")" method="POST" enctype="multipart/form-data" id="sub">
                             <div class="row">
                                 @Html.EditorFor(model => model.iditem, new { htmlAttributes = new { @class = "form-control", @required = "true", @hidden = "true" } })
                                 @Html.ValidationMessageFor(model => model.iditem, "", new { @class = "text-danger" })
@@ -146,25 +145,33 @@
 <!-- /.content -->
 @section scripts{
     <script>
-        $('textarea').trumbowyg({
-            btns: [
-                ['viewHTML'],
-                ['undo', 'redo'], // Only supported in Blink browsers
-                ['formatting'],
-                ['strong', 'em', 'del'],
-                ['superscript', 'subscript'],
-                ['link'],
-                ['insertImage'],
-                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                ['unorderedList', 'orderedList'],
-                ['horizontalRule'],
-                ['removeformat'],
-                ['fullscreen'],
-                ['foreColor', 'backColor']
-            ],
-            autogrow: true,
-            lang: 'fr'
+        $(function () {
+            $('#sub').on('submit', function (e) { //use on if jQuery 1.7+
+                //e.preventDefault();  //prevent form from submitting
+                $("#imodal").modal('show');
+            });
+           
+            $('textarea').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor']
+                ],
+                autogrow: true,
+                lang: 'fr'
+            });
         });
+        
     </script>
 }
 

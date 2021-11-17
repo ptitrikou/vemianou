@@ -1,0 +1,239 @@
+﻿@using Vemianou.Models;
+@model ITEM
+@{
+    ViewBag.Title = "Evenement";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<SOUSFAMILL> listeCategorie = ViewBag.categories;
+}
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark text-blue">Ajouter une vidéo</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Acceuil</a></li>
+                    <li class="breadcrumb-item active">Vidéo</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    @if (TempData["error"] != null)
+    {
+        <div class="container -fluid">
+            <div class="alert alert-danger alert-dismissible">
+                @TempData["error"]
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+        </div>
+
+    }
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ajouter un nouvelle vidéo</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        <form action="@Url.Action("NewVideo","Admin")" method="POST" enctype="multipart/form-data" id="sub">
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Titre</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    @Html.EditorFor(model => model.designation, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                                    @Html.ValidationMessageFor(model => model.designation, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Description</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    @Html.EditorFor(model => model.designdetails, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                                    @Html.ValidationMessageFor(model => model.designdetails, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Details</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <small></small>
+                                    <div id="trumbowyg-demo"></div>
+                                    <textarea class="form-control" name="designdetails2" rows="15" required></textarea>
+                                    @Html.ValidationMessageFor(model => model.designdetails2, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Categorie</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <select class="form-control" name="category">
+                                        @if (listeCategorie.Count > 0)
+                                        {
+                                            foreach (SOUSFAMILL sf in listeCategorie)
+                                            {
+                                                <option value="@sf.idsousfamill">@sf.libsousfamill</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Date évenement</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    @Html.EditorFor(model => model.datpromo1, new { htmlAttributes = new { @class = "form-control", @required = "true", @type = "date" } })
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Ordre</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="number" name="ordre1" class="form-control" id="devise" min="0" value="0" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="20" />
+                                    <input type="file" class="form-control" name="file1" id="imagpath1" accept="video/*" value="" aria-describedby="" placeholder="" required>
+                                </div>
+                            </div>
+
+                            @*<div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier2</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file2" id="imagpath2" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier3</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file3" id="imagpath3" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier4</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file4" id="imagpath4" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier5</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file5" id="imagpath5" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier6</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file6" id="imagpath6" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier7</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file7" id="imagpath7" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Fichier8</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file8" id="imagpath8" accept="video/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>*@
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="cursor:pointer">Annuler</button>
+                                <button type="submit" class="btn btn-success" style="cursor:pointer">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(function () {
+            $('#sub').on('submit', function (e) { //use on if jQuery 1.7+
+                //e.preventDefault();  //prevent form from submitting
+                $("#imodal").modal('show');
+            });
+
+            $('textarea').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor']
+                ],
+                autogrow: true,
+                lang: 'fr'
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
