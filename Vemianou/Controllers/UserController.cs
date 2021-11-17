@@ -49,24 +49,24 @@ public class UserController : Controller
             
         }
 
-    [HttpPost()]
-    public ActionResult Login(USER us)
-    {
-        USER user;
-        user = userService.getUser(us.loginuser, us.passeuser);
-        if (user == null)
+        [HttpPost()]
+        public ActionResult Login(USER us)
         {
-            ViewData["errins"] = "Compte non trouvé!";
-            return View("~/Views/Home/Login.cshtml");
-        }
-        else
-        {
-            FormsAuthentication.SetAuthCookie(us.iduser.ToString(), false);
-            Session["user"] = user;
-            return RedirectToAction("ListeEvenements", "Admin");
-        }
+            USER user;
+            user = userService.getUser(us.loginuser, us.passeuser);
+            if (user == null)
+            {
+                ViewData["errins"] = "Compte non trouvé!";
+                return View("~/Views/Home/Login.cshtml");
+            }
+            else
+            {
+                FormsAuthentication.SetAuthCookie(us.iduser.ToString(), false);
+                Session["user"] = user;
+                return RedirectToAction("ListeEvenements", "Admin");
+            }
       
-    }
+        }
 
 
         public ActionResult NouveauCompte()

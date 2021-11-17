@@ -11,6 +11,7 @@ namespace Vemianou.Controllers
     public class HomeController : Controller
     {
         ItemService itemService = new ItemService();
+        [Route("Accueil")]
         public ActionResult Index()
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
@@ -57,10 +58,10 @@ namespace Vemianou.Controllers
             ViewBag.evenementsfutur = eventsviewmodels2;
             return View();
         }
-
+        [Route("Apropos")]
         public ActionResult About()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -82,7 +83,7 @@ namespace Vemianou.Controllers
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
 
             return View();
         }
@@ -94,9 +95,10 @@ namespace Vemianou.Controllers
         {
             return View();
         }
+        [Route("Contact")]
         public ActionResult Contact()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -118,7 +120,7 @@ namespace Vemianou.Controllers
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
 
             return View();
         }
@@ -152,6 +154,7 @@ namespace Vemianou.Controllers
             }
             
         }
+        [Route("Details")]
         public ActionResult DetailsEvenement(int iditem)
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
@@ -191,6 +194,7 @@ namespace Vemianou.Controllers
             }
             return View(eventviewmodel);
         }
+        [Route("NosActions")]
         public ActionResult Event(int? cat, int? nb)
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
@@ -263,6 +267,7 @@ namespace Vemianou.Controllers
             
             return View(eventsviewmodels);
         }
+        [Route("Galleries")]
         public ActionResult Galleries()
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
