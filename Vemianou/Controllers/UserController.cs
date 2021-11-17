@@ -22,7 +22,7 @@ public class UserController : Controller
         }
         public ActionResult Login()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -44,7 +44,7 @@ public class UserController : Controller
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
             return View("~/Views/Home/Login.cshtml");
             
         }
