@@ -215,6 +215,7 @@
     <Compile Include="ViewsModels\AppartementViewModel.cs" />
     <Compile Include="ViewsModels\CommandeViewModel.cs" />
     <Compile Include="ViewsModels\EvenementViewModel.cs" />
+    <Compile Include="ViewsModels\EvenementViewModel2.cs" />
     <Compile Include="ViewsModels\ImageViewModel.cs" />
     <Compile Include="ViewsModels\ItemViewModel.cs" />
     <Compile Include="ViewsModels\MenuDuJourViewModel.cs" />
@@ -2012,6 +2013,7 @@
     <Content Include="Content\images\event-4.jpg" />
     <Content Include="Content\images\event-5.jpg" />
     <Content Include="Content\images\event-6.jpg" />
+    <Content Include="Content\images\im2.png" />
     <Content Include="Content\images\image_1.jpg" />
     <Content Include="Content\images\image_2.jpg" />
     <Content Include="Content\images\image_3.jpg" />
@@ -2624,6 +2626,9 @@
     <Content Include="Views\Home\DetailsEvenement.cshtml" />
     <Content Include="Views\Admin\Videos.cshtml" />
     <Content Include="Views\Admin\NewVideo.cshtml" />
+    <Content Include="Views\Admin\UpdateVideo.cshtml" />
+    <Content Include="Views\Admin\NewPhoto.cshtml" />
+    <Content Include="Views\Admin\photos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -43,15 +43,13 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body" style="overflow-x:auto">
-
                         <table id="example" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Date</th>
                                     <th>Vidéo</th>
-                                    <th>Designation</th>
-                                    <th>Description</th>
+                                    <th>Titre</th>
                                     <th>Date de publication</th>
                                     <th>Action</th>
 
@@ -66,16 +64,16 @@
                                             <td>@(Model.IndexOf(vent) + 1)</td>
                                             <td>@vent.dateevent</td>
                                             <td>
-                                                 <video src="~/Content/images/@vent.imagepath" style="height:70px;width:auto" alt=""></video>
+                                                <div class="embed-responsive embed-responsive-16by9">
+                                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@vent.imagepath" allowfullscreen></iframe>
+                                                </div>
                                             </td>
                                             <td>@vent.designation</td>
-                                            <td>@vent.description</td>
                                             <td>@vent.datepublish</td>
 
                                             <td width="10px">
-                                                <!--<a href="@Url.Action("showItem","Admin",new {id=vent.iditem,type=2})" onclick=""><i class="fas fa-edit blue" style="color:#0069d9"></i></a>-->
+                                                <a href="@Url.Action("UpdateVideo","Admin",new {id=vent.iditem})" onclick=""><i class="fas fa-edit blue" style="color:#0069d9"></i></a>
                                                 <a href="#" onclick="deleteArticle(@vent.iditem,@typ)"><i class="fa fa-trash blue" style="color:#0069d9"></i></a>
-
                                             </td>
 
                                         </tr>
@@ -125,14 +123,6 @@
                 }
             })
         }
-
-        function updateCategorie(id, nom) {
-
-            $("#idcat").val(id);
-            $("#nomcat").val(nom);
-            $('#update-categorie').modal('show');
-        }
-
     </script>
 }
 

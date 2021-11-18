@@ -12,52 +12,36 @@ using System.Web;
         public USER addUser(USER us)
         {
             USER u=null;            
-            try
-            {
-                string email = db.USER.Where(ur => ur.email == us.email).Select(ur => ur.email).ToList().FirstOrDefault();
-                if (email != null)
-                {
-                    u=null;
-                }
-                else
-                {
-                    USER usr = new USER();
-                    usr.nomuser = us.nomuser;
-                    usr.prenomsuser = us.prenomsuser;
-                    usr.nomprenomsuser = us.nomuser + " " + us.prenomsuser;
-                    usr.email = us.email;
-                    usr.teluser = us.teluser;
-                    usr.sexeuser=us.sexeuser;
-                    usr.statut=true;
-                    usr.statut2=0;
-                    usr.statut3=0;
-                    usr.passeuser = us.passeuser;
-                    usr.adressuser=us.adressuser;
-                    usr.coduser="aucun";
-                    usr.datecreat=DateTime.Now;
-                    usr.details1 = "aucun";
-                    usr.details2 = "aucun";
-                    usr.details3 = "aucun";
-                    usr.idville = 0;
-                    usr.idpays = 0;
-                    usr.typuser = 2;
-                    usr.typuser2 = 0;
-                    usr.indicatifuser = "+228";
-                    usr.loginuser = us.loginuser;
+            
+            
+            USER usr = new USER();
+            usr.nomuser = us.nomuser;
+            usr.prenomsuser = us.prenomsuser;
+            usr.nomprenomsuser = us.nomuser + " " + us.prenomsuser;
+            usr.email = us.email;
+            usr.teluser = us.teluser;
+            usr.sexeuser=us.sexeuser;
+            usr.statut=true;
+            usr.statut2=0;
+            usr.statut3=0;
+            usr.passeuser = us.passeuser;
+            usr.adressuser=us.adressuser;
+            usr.coduser="aucun";
+            usr.datecreat=DateTime.Now;
+            usr.details1 = "aucun";
+            usr.details2 = "aucun";
+            usr.details3 = "aucun";
+            usr.idville = 0;
+            usr.idpays = 0;
+            usr.typuser = 2;
+            usr.typuser2 = 0;
+            usr.indicatifuser = "+228";
+            usr.loginuser = us.loginuser;
 
-                    db.USER.Add(usr);
-                    db.SaveChanges();
-                    u = usr;
-                }
-                                
-            }
-            catch (Exception ex)
-            {
-               
-                Console.WriteLine(ex.ToString());
-                
-            }
-
+            db.USER.Add(usr);
+            int n =db.SaveChanges();
+            u = usr;
+          
             return u;
         }
 

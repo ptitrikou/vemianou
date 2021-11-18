@@ -1,25 +1,27 @@
-﻿
+﻿@using Vemianou.ViewsModels
 @{
     ViewBag.Title = "Galleries";
+    List<EvenementViewModel> videos = ViewBag.videos;
+    List<EvenementViewModel2> photos = ViewBag.photos;
 }
 @*<div class="hero-wrap" style="background-image: url('/Content/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-            <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="@Url.Action("Index","Home")">Acceuil</a></span> / <span>Galleries</span></p>
-                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Galleries</h1>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+                <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="@Url.Action("Index","Home")">Acceuil</a></span> / <span>Galleries</span></p>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Galleries</h1>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 <div class="hero-wrap2" style="background-image: url('/Content/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container" style="height:280px">
         <div class="row no-gutters  align-items-center justify-content-center" data-scrollax-parent="true" style="height:250px">
             <div class="col-md-7 ftco-animate text-center " style="margin-bottom:auto;margin-top:auto">
-                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="@Url.Action("Index","Home")">Acceuil</a></span> / <span>Galleries</span></p>
-                <h1 class="bread font-weight-bold text-white ">Galleries</h1>
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="@Url.Action("Index","Home")">Acceuil</a></span> / <span>Galerie</span></p>
+                <h1 class="bread font-weight-bold text-white ">Galerie</h1>
             </div>
         </div>
     </div>
@@ -29,336 +31,312 @@
         <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
             <li class="nav-item pl-1 pr-1">
                 <a role="tab" class="nav-link2 active" id="tab-1" data-toggle="tab" href="#tab-content-1">
-                    <span>Remise de tables bancs Aneho</span>
+                    <span>Photos publiée</span>
                 </a>
             </li>
             <li class="nav-item pl-1 pr-1">
                 <a role="tab" class="nav-link2" id="tab-2" data-toggle="tab" href="#tab-content-2">
-                    <span>Dons de moto Glidji</span>
+                    <span>Vidéos publiée</span>
                 </a>
             </li>
-            <li class="nav-item pl-1 pr-1">
-                <a role="tab" class="nav-link2" id="tab-3" data-toggle="tab" href="#tab-content-3">
-                    <span>Journée de l'arbre 2015</span>
-                </a>
-            </li>
-            <li class="nav-item pl-1 pr-1">
-                <a role="tab" class="nav-link2" id="tab-4" data-toggle="tab" href="#tab-content-4">
-                    <span>Don de latrine publique Badou</span>
-                </a>
-            </li>
+
         </ul>
         <div class="tab-content mt-3">
             <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier44/DSC_0068.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0068.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
+                
+                    @foreach (EvenementViewModel2 pt in photos) {
+                        <div class="d-md-flex">
+                            @foreach(EvenementViewModel ev in pt.photos) {
+                                <a href="/Content/images/@(ev.imagepath)" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/@(ev.imagepath));">
+                                <div class="icon d-flex justify-content-center align-items-center">
+                                    <span class="icon-search"></span>
+                                </div>
+                            </a>
+                            }
                         </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0114.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0114.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0196.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0196.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0230.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0230.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier44/DSC_0166.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0166.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0247.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0247.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0169.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0169.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0102.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0102.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier44/DSC_0230.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0230.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0167.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0167.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0232.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0232.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier44/DSC_0256.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0256.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
+
+                     }
+                    <div class="d-md-flex">
+                        <a href="~/Content/images/dossier6/im_9.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_9.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_10.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_10.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_11.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_11.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_12.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_12.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                
             </div>
             <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier33/IMG_8056.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8056.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
+                @foreach(EvenementViewModel vid in videos) { 
+                    <div class="col-lg-4 col-md-4 border">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@vid.imagepath" allowfullscreen></iframe>
                         </div>
-                    </a>
-                    <a href="/Content/images/dossier33/IMG_8069.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8069.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier33/IMG_8089.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8089.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier33/IMG_8097.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8097.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier33/IMG_8100.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8100.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
+                         <span class="text-left" style="color:black">@vid.designation</span><br/>
+                         <span style="font-size:15px;color:#606060">Date de sortie:@vid.dateevent</span>
 
+                    </div>
+                 }
                 </div>
-            </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-3" role="tabpanel">
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier11/IMG_0284.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0284.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier11/IMG_0360.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0360.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier11/IMG_0370.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0370.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier11/IMG_0455.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0455.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-md-flex">
-                    <a href="/Content/images/dossier11/IMG_0459.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0459.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="/Content/images/dossier11/IMG_0461.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0461.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier11/IMG_0464.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0464.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier11/IMG_0476.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0476.JPG);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="tab-pane tabs-animation fade" id="tab-content-4" role="tabpanel">
-                <div class="d-md-flex">
-                    <a href="~/Content/images/dossier6/im_1.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_1.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_2.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_2.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_3.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_3.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_4.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_4.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="d-md-flex">
-                    <a href="~/Content/images/dossier6/im_5.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_5.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_6.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_6.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_7.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_7.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_8.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_8.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    
-                </div>
-                <div class="d-md-flex">
-                    <a href="~/Content/images/dossier6/im_9.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_9.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_10.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_10.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_11.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_11.jpeg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                    <a href="~/Content/images/dossier6/im_12.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_12.jpg);">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-search"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+
         </div>
     </div>
+    @*<div class="container">
+            <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+                <li class="nav-item pl-1 pr-1">
+                    <a role="tab" class="nav-link2 active" id="tab-1" data-toggle="tab" href="#tab-content-1">
+                        <span>Remise de tables bancs Aneho</span>
+                    </a>
+                </li>
+                <li class="nav-item pl-1 pr-1">
+                    <a role="tab" class="nav-link2" id="tab-2" data-toggle="tab" href="#tab-content-2">
+                        <span>Dons de moto Glidji</span>
+                    </a>
+                </li>
+                <li class="nav-item pl-1 pr-1">
+                    <a role="tab" class="nav-link2" id="tab-3" data-toggle="tab" href="#tab-content-3">
+                        <span>Journée de l'arbre 2015</span>
+                    </a>
+                </li>
+                <li class="nav-item pl-1 pr-1">
+                    <a role="tab" class="nav-link2" id="tab-4" data-toggle="tab" href="#tab-content-4">
+                        <span>Don de latrine publique Badou</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content mt-3">
+                <div class="tab-pane tabs-animation fade show active" id="tab-content-1" role="tabpanel">
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier44/DSC_0068.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0068.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0114.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0114.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0196.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0196.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0230.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0230.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier44/DSC_0166.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0166.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0247.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0247.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0169.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0169.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0102.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0102.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier44/DSC_0230.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0230.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0167.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0167.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0232.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0232.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier44/DSC_0256.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0256.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier33/IMG_8056.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8056.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier33/IMG_8069.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8069.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier33/IMG_8089.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8089.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier33/IMG_8097.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8097.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier33/IMG_8100.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8100.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="tab-pane tabs-animation fade" id="tab-content-3" role="tabpanel">
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier11/IMG_0284.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0284.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier11/IMG_0360.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0360.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier11/IMG_0370.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0370.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier11/IMG_0455.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0455.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="/Content/images/dossier11/IMG_0459.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0459.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="/Content/images/dossier11/IMG_0461.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0461.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier11/IMG_0464.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0464.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier11/IMG_0476.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier1/IMG_0476.JPG);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane tabs-animation fade" id="tab-content-4" role="tabpanel">
+                    <div class="d-md-flex">
+                        <a href="~/Content/images/dossier6/im_1.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_1.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_2.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_2.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_3.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_3.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_4.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_4.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="~/Content/images/dossier6/im_5.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_5.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_6.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_6.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_7.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_7.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_8.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_8.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="d-md-flex">
+                        <a href="~/Content/images/dossier6/im_9.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_9.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_10.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_10.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_11.jpeg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_11.jpeg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                        <a href="~/Content/images/dossier6/im_12.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier6/im_12.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
 </section>
-@*<section class="ftco-section ftco-gallery">
-        <div class="container">
-            <div class="d-md-flex">
-                <a href="/Content/images/dossier44/DSC_0068.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0068.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0114.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0114.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0196.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0196.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0230.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0230.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="d-md-flex">
-                <a href="/Content/images/dossier44/DSC_0166.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0166.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0247.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0247.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0169.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0169.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier44/DSC_0102.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier4/DSC_0102.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="d-md-flex">
-                <a href="/Content/images/dossier33/IMG_8056.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8056.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier33/IMG_8069.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8069.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier33/IMG_8089.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8089.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier33/IMG_8097.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier3/IMG_8097.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="d-md-flex">
-                <a href="/Content/images/dossier22/DSC_0239.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier2/DSC_0239.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier22/DSC_0242.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier2/DSC_0242.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier22/DSC_0248.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier2/DSC_0248.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-                <a href="/Content/images/dossier22/DSC_0346.JPG" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(/Content/images/dossier2/DSC_0346.JPG);">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>*@
 
 <section class="ftco-section-3 img" style="background-image: url(/Content/images/bg_3.jpg);">
     <div class="overlay"></div>

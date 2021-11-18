@@ -1,0 +1,128 @@
+﻿@using Vemianou.Models;
+@model ITEM
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    List<SOUSFAMILL> listeCategorie = ViewBag.categories;
+}
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark text-blue">Ajouter des photos</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Acceuil</a></li>
+                    <li class="breadcrumb-item active">Photos</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    @if (TempData["error"] != null)
+    {
+        <div class="container -fluid">
+            <div class="alert alert-danger alert-dismissible">
+                @TempData["error"]
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+        </div>
+
+    }
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ajouter des photos</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        <form action="@Url.Action("NewPhoto","Admin")" method="POST" enctype="multipart/form-data" id="sub">
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3 d-none">
+                                    <label>Categorie</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <select class="form-control" name="category" hidden>
+                                        @if (listeCategorie.Count > 0)
+                                        {
+                                            foreach (SOUSFAMILL sf in listeCategorie)
+                                            {
+                                                <option value="@sf.idsousfamill">@sf.libsousfamill</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Photos</label>
+                                </div>
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" name="file" id="imagpath2" accept="image/*" value="" aria-describedby="" placeholder="">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="cursor:pointer">Annuler</button>
+                                <button type="submit" class="btn btn-success" style="cursor:pointer">Enregistrer</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@section scripts{
+    <script>
+        $(function () {
+            $('#sub').on('submit', function (e) { //use on if jQuery 1.7+
+                //e.preventDefault();  //prevent form from submitting
+                $("#imodal").modal('show');
+            });
+
+            $('textarea').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor']
+                ],
+                autogrow: true,
+                lang: 'fr'
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

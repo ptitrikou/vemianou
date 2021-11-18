@@ -87,7 +87,7 @@
                                     <label>Date</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="date" class="form-control" value="@Model.datpromo1.ToString("yyyy-MM-dd")" name="datpromo1" />
+                                    <input type="date" class="form-control" value="@Model.datpromo1.ToString("yyyy-MM-dd")" name="datpromo1" required/>
                                     @Html.ValidationMessageFor(model => model.datpromo1, "", new { @class = "text-danger" })
                                 </div>
                             </div>

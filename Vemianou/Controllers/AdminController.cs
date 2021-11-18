@@ -30,7 +30,7 @@ public class AdminController : Controller
         }
         public ActionResult ListeAdministrateurs()
         {
-            List<USER> users = db.USER.Where(u => u.typuser == 1).ToList();
+            List<USER> users = db.USER.Where(u => u.typuser != 0).ToList();
             USER us = Session["user"] as USER;
             ViewBag.typeuser = us.typuser;
             return View("Administrateurs",users);
@@ -618,33 +618,89 @@ public class AdminController : Controller
                 {
                     TempData["error"] = "Modification non éffectueé !";
                 }
-
-                if(itm.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup =="restauration")
-                     return RedirectToAction("ListeMenus");
-                else if(itm.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == "evenementiel")
-                     return RedirectToAction("ListeEvenements");
+                if(itm.typeitem == 0)
+                    return RedirectToAction("ListeEvenements");
                 else
-                     return RedirectToAction("ListeEvenements");
-
+                    return RedirectToAction("ListeVideos");
+                     
         }
+
+        
         public ActionResult deleteItem(int id,int type)
-        {           
-                string r = itemService.deleteArticle(id);
+        {       
+                ITEM it = itemService.getItem(id);
+                string r = itemService.deleteArticle(id); 
+                FileInfo file;
                 if (r == "1")
                 {
                     TempData["success"] = "Supression éffectuée avec succès !";
-                    /*System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath1)));
-                    System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath2)));
-                    System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath3)));*/
+                    if(it.imagpath1 != null) { 
+                        file= new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath1)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        }
+                    }                  
+                    if(it.imagpath2 !=null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath2)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        }                        
+                    }
+                    if(it.imagpath3 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath3)));  
+                        file.Delete();  
+                    }
+                    if(it.imagpath4 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath4)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath5 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath5)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath6 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath6)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath7 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath7)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath8 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath8)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                       
                 }
                 else
                 {
                     TempData["error"] = "Supression non éffectuée!";
                 }
-                /*if(type == 0)                   
-                    return RedirectToAction("ListeMenus");
-                else
-                   return RedirectToAction("ListeAppartements");*/
+
                 return Redirect(Request.UrlReferrer.ToString());
             
         }
@@ -659,8 +715,15 @@ public class AdminController : Controller
         public ActionResult updateImage(int id, int nim, string oldimage, string type, HttpPostedFileBase file1)
         {
             
-            string r;
-            System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));
+            string r; 
+            FileInfo file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));  
+            try{
+                file.Delete();  
+            }                         
+            catch(Exception){
+            } 
+           
+            //System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));
             string fileName = Path.GetFileName(file1.FileName);
             fileName = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName;
             file1.SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName)));
@@ -963,7 +1026,30 @@ public class AdminController : Controller
             }
             return View("Videos",evenements);
         }
+        public ActionResult ListePhotos()
+        {
+            List<EvenementViewModel> photos = new List<EvenementViewModel>();
+            List<SousfamillViewModel> sousFamilleViewModels = new List<SousfamillViewModel>();
+            List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
+            List<ITEM> listArticle = itemService.listePhotos("publication");
+            foreach (ITEM it in listArticle)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.datepublish = it.datpublish.ToString("dd-MM-yyyy");
+                vent.imagepath = it.imagpath1;
+                vent.iditem = it.iditem;
+                photos.Add(vent);
+            }
 
+            foreach(SOUSFAMILL sfm in listeCategorie){
+                SousfamillViewModel sfv = new SousfamillViewModel();
+                sfv.idsousfamill = sfm.idsousfamill ;
+                sfv.libsousfamill = sfm.libsousfamill ;
+                sousFamilleViewModels.Add(sfv);
+            }
+            ViewBag.categories = sousFamilleViewModels;
+            return View("photos",photos);
+        }
         public ActionResult NouveauEvenement()
         {
             List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
@@ -975,6 +1061,31 @@ public class AdminController : Controller
             List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
             ViewBag.categories = listeCategorie;
             return View();
+        }
+        [HttpPost]
+        public ActionResult NewPhoto(int category) {
+            string fileName;
+            for(int i =0; i < Request.Files.Count; i++) { 
+                fileName = Path.GetFileName(Request.Files[i].FileName);
+                fileName = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName;
+                Request.Files[i].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName)));
+                ITEM it = new ITEM();
+                it.typeitem =2;        
+                it.category = category;
+                it.datpublish = DateTime.Now;
+                it.datpromo2 = DateTime.Now;
+                it.datpromo1 = DateTime.Now;
+                it.imagpath1 = fileName ;
+                db.ITEM.Add(it);
+            }
+            db.SaveChanges();
+            return RedirectToAction("ListePhotos");
+        }
+        public ActionResult UpdateVideo(int id) { 
+            ITEM it = itemService.getItem(id);
+            List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
+            ViewBag.categories = listeCategorie;
+            return View(it);
         }
 
         [HttpPost]
@@ -1071,7 +1182,7 @@ public class AdminController : Controller
         [ValidateInput(false)] 
         public ActionResult NewVideo(ITEM it)
         {
-            string fileName, fileName2, fileName3, fileName4, fileName5, fileName6, fileName7, fileName8;
+            /*string fileName, fileName2, fileName3, fileName4, fileName5, fileName6, fileName7, fileName8;
 
             if (!string.IsNullOrEmpty(Request.Files[0].FileName))
             {
@@ -1138,7 +1249,7 @@ public class AdminController : Controller
 
                 Request.Files[7].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName8)));
                 it.imagpath8 = fileName8;
-            }
+            }*/
 
 
             string r = itemService.addItem2(it);
