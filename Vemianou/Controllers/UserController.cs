@@ -22,7 +22,7 @@ public class UserController : Controller
         }
         public ActionResult Login()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -44,29 +44,29 @@ public class UserController : Controller
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
             return View("~/Views/Home/Login.cshtml");
             
         }
 
-    [HttpPost()]
-    public ActionResult Login(USER us)
-    {
-        USER user;
-        user = userService.getUser(us.loginuser, us.passeuser);
-        if (user == null)
+        [HttpPost()]
+        public ActionResult Login(USER us)
         {
-            ViewData["errins"] = "Compte non trouvé!";
-            return View("~/Views/Home/Login.cshtml");
-        }
-        else
-        {
-            FormsAuthentication.SetAuthCookie(us.iduser.ToString(), false);
-            Session["user"] = user;
-            return RedirectToAction("ListeEvenements", "Admin");
-        }
+            USER user;
+            user = userService.getUser(us.loginuser, us.passeuser);
+            if (user == null)
+            {
+                ViewData["errins"] = "Compte non trouvé!";
+                return View("~/Views/Home/Login.cshtml");
+            }
+            else
+            {
+                FormsAuthentication.SetAuthCookie(us.iduser.ToString(), false);
+                Session["user"] = user;
+                return RedirectToAction("ListeEvenements", "Admin");
+            }
       
-    }
+        }
 
 
         public ActionResult NouveauCompte()

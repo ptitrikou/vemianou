@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
+[Authorize]
 public class AdminController : Controller
     {
         SousFamilleService categorieService = new SousFamilleService();
@@ -29,7 +30,7 @@ public class AdminController : Controller
         }
         public ActionResult ListeAdministrateurs()
         {
-            List<USER> users = db.USER.Where(u => u.typuser == 1).ToList();
+            List<USER> users = db.USER.Where(u => u.typuser != 0).ToList();
             USER us = Session["user"] as USER;
             ViewBag.typeuser = us.typuser;
             return View("Administrateurs",users);
@@ -59,16 +60,13 @@ public class AdminController : Controller
         }
       
         public ActionResult NouvellesCommandes()
-        {
-           
+        {          
                 List<VENTE> listeCommande = commandeService.nouvellesCommande();
                 ViewBag.cmdencours = commandeService.nbreCommandEncours();
                 ViewBag.cmdlivre = commandeService.nbreCommandLivre();
                 ViewBag.cmdeffectue = commandeService.listeCommande().Count;
                 ViewBag.nclients = userService.listUsers().Count;
                 return View(listeCommande);
-          
-
         }
 
         //article
@@ -79,8 +77,10 @@ public class AdminController : Controller
                 ViewBag.categories = listeCategorie;
                 ViewBag.familles = familleService.listeFamille();
                 return View();
-          
-
+        }
+        
+        public ActionResult Videos() { 
+            return View();
         }
         public ActionResult Familles()
         {
@@ -618,33 +618,89 @@ public class AdminController : Controller
                 {
                     TempData["error"] = "Modification non éffectueé !";
                 }
-
-                if(itm.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup =="restauration")
-                     return RedirectToAction("ListeMenus");
-                else if(itm.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == "evenementiel")
-                     return RedirectToAction("ListeEvenements");
+                if(itm.typeitem == 0)
+                    return RedirectToAction("ListeEvenements");
                 else
-                     return RedirectToAction("ListeEvenements");
-
+                    return RedirectToAction("ListeVideos");
+                     
         }
+
+        
         public ActionResult deleteItem(int id,int type)
-        {           
-                string r = itemService.deleteArticle(id);
+        {       
+                ITEM it = itemService.getItem(id);
+                string r = itemService.deleteArticle(id); 
+                FileInfo file;
                 if (r == "1")
                 {
                     TempData["success"] = "Supression éffectuée avec succès !";
-                    /*System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath1)));
-                    System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath2)));
-                    System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", imagepath3)));*/
+                    if(it.imagpath1 != null) { 
+                        file= new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath1)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        }
+                    }                  
+                    if(it.imagpath2 !=null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath2)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        }                        
+                    }
+                    if(it.imagpath3 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath3)));  
+                        file.Delete();  
+                    }
+                    if(it.imagpath4 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath4)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath5 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath5)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath6 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath6)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath7 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath7)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                    if(it.imagpath8 != null) { 
+                        file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", it.imagpath8)));  
+                        try{
+                           file.Delete();  
+                        }                         
+                        catch(Exception){
+                        } 
+                    }
+                       
                 }
                 else
                 {
                     TempData["error"] = "Supression non éffectuée!";
                 }
-                /*if(type == 0)                   
-                    return RedirectToAction("ListeMenus");
-                else
-                   return RedirectToAction("ListeAppartements");*/
+
                 return Redirect(Request.UrlReferrer.ToString());
             
         }
@@ -659,8 +715,15 @@ public class AdminController : Controller
         public ActionResult updateImage(int id, int nim, string oldimage, string type, HttpPostedFileBase file1)
         {
             
-            string r;
-            System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));
+            string r; 
+            FileInfo file = new FileInfo(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));  
+            try{
+                file.Delete();  
+            }                         
+            catch(Exception){
+            } 
+           
+            //System.IO.File.Delete(Server.MapPath(Path.Combine("~/Content/images/", oldimage)));
             string fileName = Path.GetFileName(file1.FileName);
             fileName = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName;
             file1.SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName)));
@@ -925,77 +988,8 @@ public class AdminController : Controller
             commandeService.updateCommande(idcommande);
             return RedirectToAction("Index", "Admin");
         }
-         
-        //public ActionResult MenuDuJour()
-        //{
-        //    List<MenuDuJourViewModel> menus = new List<MenuDuJourViewModel>();
-        //    List<ITEM>items = new List<ITEM>();
-        //    foreach(PARAMS pr in db.PARAMS.Where(p => p.libp.Equals("menu")).ToList())
-        //    {
-        //        MenuDuJourViewModel menudujour = new MenuDuJourViewModel();
-        //        ITEM it = itemService.getItem((int)pr.p1);
-        //        menudujour.iditem = it.iditem;
-        //        menudujour.designation = it.designation;
-        //        menudujour.description = it.designdetails;
-        //        if (it.tauxremiz != 0)
-        //        {
-        //            menudujour.prix = it.prix2.ToString();
-        //        }
-        //        else
-        //        {
-        //            menudujour.prix = it.prixitem.ToString();
-        //        }
-        //        menudujour.dateenr = ((DateTime)(pr.p40)).ToString("dd-MM-yyyy");
-
-        //        if(((DateTime)pr.p40 - DateTime.Now).TotalDays == 0) { 
-        //           menudujour.date="Aujourd'hui";
-        //           menudujour.stat = 1;
-        //        }else if(((DateTime)pr.p40 - DateTime.Now).TotalDays > 0){
-        //           menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
-        //           menudujour.stat = 2;
-        //        }
-        //        else {
-        //           menudujour.date = ((DateTime)(pr.p41)).ToString("dd-MM-yyyy");
-        //           menudujour.stat = 0;
-        //        }
-               
-        //        menudujour.lienimage = it.imagpath1;
-        //        menus.Add(menudujour);
-        //    }
-           
-        //    foreach (SOUSFAMILL sfm in sousFamilleService.listeCategorie("restauration"))
-        //    {
-        //        items.AddRange(sfm.ITEM);
-        //    }
-
-        //    ViewBag.listemenu = new SelectList(items, "iditem", "designation");
-        //    ViewBag.dateactu = DateTime.Now.ToString("yyyy-MM-dd");
-        //    return View(menus);
-        //}
-        
-        [HttpPost]
-        public ActionResult MenuDuJour(DateTime date,int iditem)
-        {
-            PARAMS pr = new PARAMS();
-            DateTime datemenu = new DateTime(date.Year,date.Month,date.Day);
-            pr.p1 = iditem;
-            pr.libp = "menu";
-            pr.p41 = datemenu;
-            pr.p40 = DateTime.Now;
-            db.PARAMS.Add(pr);
-            db.SaveChanges();
-            return RedirectToAction("MenuDuJour");
-        }
-        [HttpPost]
-        public ActionResult DeleteMenuDuJour(int iditem)
-        {
-            PARAMS pr = db.PARAMS.Where(p => p.p1 == iditem).ToList().FirstOrDefault();
-            db.PARAMS.Remove(pr);
-            db.SaveChanges();
-            TempData["success"] = "Menu supprimé avec succès !";
-            return RedirectToAction("MenuDuJour");
-        }
-
+      
+       
         public ActionResult ListeEvenements()
         {
             List<EvenementViewModel> evenements = new List<EvenementViewModel>();
@@ -1014,12 +1008,84 @@ public class AdminController : Controller
             }
             return View("Evenements",evenements);
         }
+        public ActionResult ListeVideos()
+        {
+            List<EvenementViewModel> evenements = new List<EvenementViewModel>();
 
+            List<ITEM> listArticle = itemService.listeVideos("publication");
+            foreach (ITEM it in listArticle)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.iditem = it.iditem;
+                vent.designation = it.designation;
+                vent.description = it.designdetails;
+                vent.dateevent = it.datpromo1.ToString("dd-MM-yyyy");
+                vent.datepublish = it.datpublish.ToString("dd-MM-yyyy");
+                vent.imagepath = it.imagpath1;
+                evenements.Add(vent);
+            }
+            return View("Videos",evenements);
+        }
+        public ActionResult ListePhotos()
+        {
+            List<EvenementViewModel> photos = new List<EvenementViewModel>();
+            List<SousfamillViewModel> sousFamilleViewModels = new List<SousfamillViewModel>();
+            List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
+            List<ITEM> listArticle = itemService.listePhotos("publication");
+            foreach (ITEM it in listArticle)
+            {
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.datepublish = it.datpublish.ToString("dd-MM-yyyy");
+                vent.imagepath = it.imagpath1;
+                vent.iditem = it.iditem;
+                photos.Add(vent);
+            }
+
+            foreach(SOUSFAMILL sfm in listeCategorie){
+                SousfamillViewModel sfv = new SousfamillViewModel();
+                sfv.idsousfamill = sfm.idsousfamill ;
+                sfv.libsousfamill = sfm.libsousfamill ;
+                sousFamilleViewModels.Add(sfv);
+            }
+            ViewBag.categories = sousFamilleViewModels;
+            return View("photos",photos);
+        }
         public ActionResult NouveauEvenement()
         {
             List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
             ViewBag.categories = listeCategorie;
             return View();
+        }
+        public ActionResult NewVideo()
+        {
+            List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
+            ViewBag.categories = listeCategorie;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewPhoto(int category) {
+            string fileName;
+            for(int i =0; i < Request.Files.Count; i++) { 
+                fileName = Path.GetFileName(Request.Files[i].FileName);
+                fileName = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName;
+                Request.Files[i].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName)));
+                ITEM it = new ITEM();
+                it.typeitem =2;        
+                it.category = category;
+                it.datpublish = DateTime.Now;
+                it.datpromo2 = DateTime.Now;
+                it.datpromo1 = DateTime.Now;
+                it.imagpath1 = fileName ;
+                db.ITEM.Add(it);
+            }
+            db.SaveChanges();
+            return RedirectToAction("ListePhotos");
+        }
+        public ActionResult UpdateVideo(int id) { 
+            ITEM it = itemService.getItem(id);
+            List<SOUSFAMILL> listeCategorie = sousFamilleService.listeCategorie("publication");
+            ViewBag.categories = listeCategorie;
+            return View(it);
         }
 
         [HttpPost]
@@ -1111,6 +1177,97 @@ public class AdminController : Controller
             }
 
             return RedirectToAction("ListeEvenements");
+        }
+        [HttpPost]
+        [ValidateInput(false)] 
+        public ActionResult NewVideo(ITEM it)
+        {
+            /*string fileName, fileName2, fileName3, fileName4, fileName5, fileName6, fileName7, fileName8;
+
+            if (!string.IsNullOrEmpty(Request.Files[0].FileName))
+            {
+
+                fileName = Path.GetFileName(Request.Files[0].FileName);
+                fileName = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName;
+
+                Request.Files[0].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName)));
+                it.imagpath1 = fileName;
+            }
+
+            if (!string.IsNullOrEmpty(Request.Files[1].FileName))
+            {
+                //
+                fileName2 = Path.GetFileName(Request.Files[1].FileName);
+                fileName2 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName2;
+                Request.Files[1].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName2)));
+                it.imagpath2 = fileName2;
+            }
+
+            if (!string.IsNullOrEmpty(Request.Files[2].FileName))
+            {
+                fileName3 = Path.GetFileName(Request.Files[2].FileName);
+                fileName3 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName3;
+                Request.Files[2].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName3)));
+                it.imagpath3 = fileName3;
+            }
+            if (!string.IsNullOrEmpty(Request.Files[3].FileName))
+            {
+                fileName4 = Path.GetFileName(Request.Files[3].FileName);
+                fileName4 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName4;
+
+                Request.Files[3].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName4)));
+                it.imagpath4 = fileName4;
+            }
+            if (!string.IsNullOrEmpty(Request.Files[4].FileName))
+            {
+                fileName5 = Path.GetFileName(Request.Files[4].FileName);
+                fileName5 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName5;
+
+                Request.Files[4].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName5)));
+                it.imagpath5 = fileName5;
+            }
+            if (!string.IsNullOrEmpty(Request.Files[5].FileName))
+            {
+                fileName6 = Path.GetFileName(Request.Files[5].FileName);
+                fileName6 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName6;
+
+                Request.Files[5].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName6)));
+                it.imagpath6 = fileName6;
+            }
+            if (!string.IsNullOrEmpty(Request.Files[6].FileName))
+            {
+                fileName7 = Path.GetFileName(Request.Files[6].FileName);
+                fileName7 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName7;
+
+                Request.Files[6].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName7)));
+                it.imagpath7 = fileName7;
+            }
+            if (!string.IsNullOrEmpty(Request.Files[7].FileName))
+            {
+                fileName8 = Path.GetFileName(Request.Files[7].FileName);
+                fileName8 = DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString() + fileName8;
+
+                Request.Files[7].SaveAs(Server.MapPath(Path.Combine("~/Content/images/", fileName8)));
+                it.imagpath8 = fileName8;
+            }*/
+
+
+            string r = itemService.addItem2(it);
+            if (r == "1")
+            {
+                TempData["success"] = "Vidéo enregistré avec succès !";
+            }
+            else if (r == "2")
+            {
+                TempData["error"] = "Vidéo non enregistré .Veuillez changer le titre !";
+            }
+            else
+            {
+                TempData["error"] = "Vidéo non enregistré .Veuillez réessayer !";
+            }
+
+            return RedirectToAction("ListeVideos");
+
         }
 }
 

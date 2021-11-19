@@ -11,12 +11,21 @@ namespace Vemianou.Controllers
     public class HomeController : Controller
     {
         ItemService itemService = new ItemService();
+        [Route("Accueil")]
         public ActionResult Index()
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<EvenementViewModel> eventsviewmodels2 = new List<EvenementViewModel>();
+            List<EvenementViewModel> eventsviewmodels3 = new List<EvenementViewModel>();
+            List<EvenementViewModel> eventsviewmodelsphoto1 = new List<EvenementViewModel>();
+            List<EvenementViewModel2> eventsviewmodelsphoto2 = new List<EvenementViewModel2>();
+            
+            
             List<ITEM> evenements = itemService.listeArticle("publication",3).OrderByDescending(i => i.iditem).ToList();
             List<ITEM> evenementsfuturs = itemService.EvenementsFuturs("publication", 3).OrderByDescending(i => i.iditem).ToList();
+            List<ITEM> videos = itemService.listeVideos("publication", 3).OrderByDescending(i => i.iditem).ToList();
+            List<ITEM> photos = itemService.listePhotos("publication").OrderByDescending(i => i.iditem).ToList();
+            int n = 0;
             foreach (ITEM it in evenements)
             {
                 EvenementViewModel vent = new EvenementViewModel();
@@ -53,14 +62,35 @@ namespace Vemianou.Controllers
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels2.Add(vent);
             }
+            foreach (ITEM it in photos)
+            {
+                n = n + 1;
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.imagepath = it.imagpath1;
+                eventsviewmodelsphoto1.Add(vent);
+                if (n == 4)
+                {
+                    n = 0;
+                    EvenementViewModel2 evenmt = new EvenementViewModel2();
+                    evenmt.photos = new List<EvenementViewModel>();
+                    evenmt.photos.AddRange(eventsviewmodelsphoto1);
+                    eventsviewmodelsphoto2.Add(evenmt);
+                    eventsviewmodelsphoto1 = new List<EvenementViewModel>();
+                }
+
+            }
+            eventsviewmodels3 = new List<EvenementViewModel>();
+            
             ViewBag.evenements = eventsviewmodels;
             ViewBag.evenementsfutur = eventsviewmodels2;
+            ViewBag.videos = eventsviewmodels3;
+            ViewBag.photos = eventsviewmodelsphoto2;
             return View();
         }
-
+        [Route("Apropos")]
         public ActionResult About()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -82,7 +112,7 @@ namespace Vemianou.Controllers
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
 
             return View();
         }
@@ -94,9 +124,10 @@ namespace Vemianou.Controllers
         {
             return View();
         }
+        [Route("Contact")]
         public ActionResult Contact()
         {
-            List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
+            /*List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
             List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
 
             foreach (ITEM it in evenements)
@@ -118,7 +149,7 @@ namespace Vemianou.Controllers
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            ViewBag.evenements = eventsviewmodels;*/
 
             return View();
         }
@@ -152,6 +183,7 @@ namespace Vemianou.Controllers
             }
             
         }
+        [Route("Details")]
         public ActionResult DetailsEvenement(int iditem)
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
@@ -191,6 +223,7 @@ namespace Vemianou.Controllers
             }
             return View(eventviewmodel);
         }
+        [Route("NosActions")]
         public ActionResult Event(int? cat, int? nb)
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
@@ -263,31 +296,43 @@ namespace Vemianou.Controllers
             
             return View(eventsviewmodels);
         }
+        [Route("Galleries")]
         public ActionResult Galleries()
         {
             List<EvenementViewModel> eventsviewmodels = new List<EvenementViewModel>();
-            List<ITEM> evenements = itemService.listeArticle("publication", 2).OrderByDescending(i => i.iditem).ToList();
-
-            foreach (ITEM it in evenements)
+            List<EvenementViewModel> eventsviewmodels2 = new List<EvenementViewModel>();
+            List<EvenementViewModel2>eventsviewmodels3 = new List<EvenementViewModel2>();
+            List<ITEM> videos = itemService.listeVideos("publication").OrderByDescending(i => i.iditem).ToList();
+            List<ITEM> photos = itemService.listePhotos("publication").OrderByDescending(i => i.iditem).ToList();
+            int n = 0;
+            foreach (ITEM it in videos)
             {
                 EvenementViewModel vent = new EvenementViewModel();
                 vent.iditem = it.iditem;
                 vent.designation = it.designation;
-                try
-                {
-                    vent.description = it.designdetails.Substring(0, 100) + "...";
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    vent.description = it.designdetails;
-                }
-
                 vent.dateevent = it.datpromo1.ToString("dd-MMMM-yyyy");
-                vent.datepublish = it.datpublish.ToString("dd-MMMM-yyyy");
                 vent.imagepath = it.imagpath1;
                 eventsviewmodels.Add(vent);
             }
-            ViewBag.evenements = eventsviewmodels;
+            foreach (ITEM it in photos)
+            {
+                n = n + 1;
+                EvenementViewModel vent = new EvenementViewModel();
+                vent.imagepath = it.imagpath1;
+                eventsviewmodels2.Add(vent);
+                if (n == 4)
+                {
+                    n = 0;
+                    EvenementViewModel2 evenmt = new EvenementViewModel2();
+                    evenmt.photos = new List<EvenementViewModel>();
+                    evenmt.photos.AddRange(eventsviewmodels2);
+                    eventsviewmodels3.Add(evenmt);
+                    eventsviewmodels2 = new List<EvenementViewModel>();
+                }
+               
+            }
+            ViewBag.videos = eventsviewmodels;
+            ViewBag.photos = eventsviewmodels3;
             return View();
         }
         

@@ -48,7 +48,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         
-                        <form action="@Url.Action("NouveauEvenement","Admin")" method="POST" enctype="multipart/form-data">
+                        <form action="@Url.Action("NouveauEvenement","Admin")" method="POST" enctype="multipart/form-data" id="sub">
                             <div class="row mb-2">
                                 <div class="col-lg-3 col-md-3">
                                     <label>Titre</label>
@@ -121,7 +121,8 @@
                                     <label>Fichier1</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file1" id="imagpath1" value="" aria-describedby="" placeholder="" required>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="20" />
+                                    <input type="file" class="form-control" name="file1" id="imagpath1" max-file-size="10" accept="image/*" value="" aria-describedby="" placeholder="" required>
                                 </div>
                             </div>
 
@@ -130,7 +131,7 @@
                                     <label>Fichier2</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file2" id="imagpath2" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file2" id="imagpath2" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
 
@@ -139,7 +140,7 @@
                                     <label>Fichier3</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file3" id="imagpath3" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file3" id="imagpath3" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -147,7 +148,7 @@
                                     <label>Fichier4</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file4" id="imagpath4" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file4" id="imagpath4" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -155,7 +156,7 @@
                                     <label>Fichier5</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file5" id="imagpath5" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file5" id="imagpath5" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -163,7 +164,7 @@
                                     <label>Fichier6</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file6" id="imagpath6" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file6" id="imagpath6" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -171,7 +172,7 @@
                                     <label>Fichier7</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file7" id="imagpath7" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file7" id="imagpath7" value="" accept="image/*" aria-describedby="" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -179,7 +180,7 @@
                                     <label>Fichier8</label>
                                 </div>
                                 <div class="col-lg-9 col-md-9">
-                                    <input type="file" class="form-control" name="file8" id="imagpath8" value="" aria-describedby="" placeholder="">
+                                    <input type="file" class="form-control" name="file8" id="imagpath8" value="" accept="image/*"aria-describedby="" placeholder="">
                                 </div>
                             </div>
 
@@ -202,24 +203,48 @@
 <!-- /.content -->
 @section scripts{
     <script>
-        $('textarea').trumbowyg({
-            btns: [
-                ['viewHTML'],
-                ['undo', 'redo'], // Only supported in Blink browsers
-                ['formatting'],
-                ['strong', 'em', 'del'],
-                ['superscript', 'subscript'],
-                ['link'],
-                ['insertImage'],
-                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                ['unorderedList', 'orderedList'],
-                ['horizontalRule'],
-                ['removeformat'],
-                ['fullscreen'],
-                ['foreColor', 'backColor']
-            ],
-            autogrow:true,
-            lang: 'fr'
+        $(function () {
+            $('#sub').on('submit', function (e) { //use on if jQuery 1.7+
+                //e.preventDefault();  //prevent form from submitting
+                let maxSize = 2097412;
+                let isOk = true;
+                $('input[type=file]').each(function () {
+                    if (typeof this.files[0] !== 'undefined') {
+                        //var maxSize = parseInt($(this).attr('max-size'), 10),
+                            size = this.files[0].size;
+                        if (maxSize < size) {
+                            isOk = false;
+                        }
+                        return isOk;
+                    }
+                });
+                if (isOk == false) {
+                    e.preventDefault();
+                    Swal.fire('Taille des fichiers dépassé', '@TempData["error"]', 'error');
+                } else {
+                    $("#imodal").modal('show');
+                }
+            });
+
+            $('textarea').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen'],
+                    ['foreColor', 'backColor']
+                ],
+                autogrow: true,
+                lang: 'fr'
+            });
         });
     </script>
 }

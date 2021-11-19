@@ -30,43 +30,126 @@ public class ItemService
          
             return r;
         }
+        public string addItem2(ITEM it)
+        {
+                string r = "";         
+            
+                List<string> listeArticle = db.ITEM.Where(i => i.designation == it.designation).Select(i => i.designation).ToList();
+                if (!listeArticle.Any()) {
+                    it.typeitem =1;                   
+                    it.datpublish = DateTime.Now;
+                    //it.datpromo1 = it.datpublish;
+                    it.datpromo2 = it.datpromo1;
+                    db.ITEM.Add(it);
+                    db.SaveChanges();
+                    r = "1";
+                }
+                else
+                {
+                   r = "2";
+                }
+         
+            return r;
+        }
+        
+        public string addItem3(ITEM it)
+        {
+                string r = "";         
+            
+                List<string> listeArticle = db.ITEM.Where(i => i.designation == it.designation).Select(i => i.designation).ToList();
+                if (!listeArticle.Any()) {
+                    it.typeitem =2;                   
+                    it.datpublish = DateTime.Now;
+                    it.datpromo2 = it.datpromo1;
+                    db.ITEM.Add(it);
+                    db.SaveChanges();
+                    r = "1";
+                }
+                else
+                {
+                   r = "2";
+                }
+         
+            return r;
+        }
+    
         //liste des articles
         public List<ITEM> listeArticle(string famille,int n = 0,int iditem = 0)
         {
             List<ITEM>listitem = new List<ITEM>();
             if (n == 0)
             {
-                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 < DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList();
 
             }
             else
             {
                 try{
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
                 }
                 catch (Exception){
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList();
                 }
             }
 
              return listitem;
         }
-
-        public List<ITEM> EvenementsFuturs(string famille, int n = 0, int iditem = 0)
+        
+        public List<ITEM> listeVideos(string famille,int n = 0,int iditem = 0)
         {
             List<ITEM>listitem = new List<ITEM>();
             if (n == 0)
             {
-                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 >= DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 < DateTime.Now && i.typeitem == 1).OrderByDescending(i => i.ordre1).ToList();
 
             }
             else
             {
                 try{
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 >= DateTime.Now).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 1).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
                 }
                 catch (Exception){
-                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 > DateTime.Now).OrderByDescending(i => i.ordre1).ToList();
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 1).OrderByDescending(i => i.ordre1).ToList();
+                }
+            }
+
+             return listitem;
+        }
+        public List<ITEM> listePhotos(string famille,int n = 0,int iditem = 0)
+        {
+            List<ITEM>listitem = new List<ITEM>();
+            if (n == 0)
+            {
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 < DateTime.Now && i.typeitem == 2).OrderByDescending(i => i.ordre1).ToList();
+
+            }
+            else
+            {
+                try{
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 2).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                }
+                catch (Exception){
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 < DateTime.Now && i.typeitem == 2).OrderByDescending(i => i.ordre1).ToList();
+                }
+            }
+
+             return listitem;
+        }
+        public List<ITEM> EvenementsFuturs(string famille, int n = 0, int iditem = 0)
+        {
+            List<ITEM>listitem = new List<ITEM>();
+            if (n == 0)
+            {
+                listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.datpromo1 >= DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList();
+
+            }
+            else
+            {
+                try{
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 >= DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList().GetRange(0, n);
+                }
+                catch (Exception){
+                    listitem = db.ITEM.Where(i => i.SOUSFAMILL.FAMILL.GROUPFAMILL.libgroup == famille && i.iditem != iditem && i.datpromo1 > DateTime.Now && i.typeitem == 0).OrderByDescending(i => i.ordre1).ToList();
                 }
             }
 
@@ -145,6 +228,8 @@ public class ItemService
             if(itm.datpromo1 == null)
                itm.datpromo1 = DateTime.Now;
 
+            if(it.imagpath1 != null)
+               itm.imagpath1 = it.imagpath1;
             try
             {
                 db.Entry(itm).State = EntityState.Modified;

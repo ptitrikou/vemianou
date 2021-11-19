@@ -121,13 +121,38 @@
                             </a>
                         </li>
 
-                        <li class="nav-item ">
-                            <a href="@Url.Action("ListeEvenements","Admin")" class="nav-link">
-                                <i class="nav-icon fas fa-bell"></i>
-                                <p>Publications</p>
-                            </a>
-                        </li>
+                        
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>
+                                    Publications
+                                    <i class="fas fa-angle-left right"></i>
 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ">
+                                    <a href="@Url.Action("ListeEvenements","Admin")" class="nav-link">
+                                        <i class="nav-icon fas fa-bell"></i>
+                                        <p>Nos Actions</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="@Url.Action("ListeVideos","Admin")" class="nav-link">
+                                        <i class="nav-icon fas fa-atlas"></i>
+                                        <p>Vidéos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="@Url.Action("ListePhotos","Admin")" class="nav-link">
+                                        <i class="nav-icon fas fa-atlas"></i>
+                                        <p>Photos</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                         <li class="nav-item ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-bell"></i>
@@ -178,9 +203,22 @@
             @RenderBody()
             <!-- /.content -->
         </div>
+        <div id="imodal" class="modal fade " data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-lg" style="display: table;position: relative;margin: 0 auto;top: calc(50% - 24px);bottom:0px">
+                <div class="modal-content p-4">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+
+                        </div>
+                        <span class="">Operation en cours. Veuillez patienter ...</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Cristal.</strong>
+            <strong>Vemianou.</strong>
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0
             </div>

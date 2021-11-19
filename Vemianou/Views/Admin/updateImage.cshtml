@@ -144,10 +144,11 @@
                 </Button>
             </div>
             <div Class="modal-body">
-                <form action="@Url.Action("updateImage","Admin")" method="POST" enctype="multipart/form-data">
+                <form action="@Url.Action("updateImage","Admin")" method="POST" enctype="multipart/form-data" id="new-im">
                     <div class="form-group">
                         <input type="text" class="form-control" id="id" name="id" value="@Model.iditem" hidden required />
                         <input type="hidden" class="form-control" id="nim" name="nim" required />
+                        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
                         <input type="hidden" class="form-control" id="oldimage" name="oldimage" required />
                         <input type="file" class="form-control" name="file1" required />
                         <input type="hidden" class="form-control" name="type" value="@ViewBag.type"/>
@@ -170,6 +171,29 @@
 <!-- /.content -->
 @section scripts{
     <script>
+        $(function () {
+            $('#new-im').on('submit', function (e) { //use on if jQuery 1.7+
+                 //e.preventDefault();  //prevent form from submitting
+                let maxSize = 2097412;
+                let isOk = true;
+                $('input[type=file]').each(function () {
+                    if (typeof this.files[0] !== 'undefined') {
+                        //var maxSize = parseInt($(this).attr('max-size'), 10),
+                        size = this.files[0].size;
+                        if (maxSize < size) {
+                            isOk = false;
+                        }
+                        return isOk;
+                    }
+                });
+                if (isOk == false) {
+                    e.preventDefault();
+                    Swal.fire('Taille des fichiers dépassé', '@TempData["error"]', 'error');
+                } else {
+                    $("#imodal").modal('show');
+                }
+            });
+        });
         function deleteArticle(id) {
             Swal.fire({
                 title: 'Etes-vous sur?',
@@ -188,7 +212,7 @@
         }
 
         function updateImage(nim,oldimage) {
-           
+
             $("#nim").val(nim);
             $("#oldimage").val(oldimage);
             $('#modal-image').modal('show');
