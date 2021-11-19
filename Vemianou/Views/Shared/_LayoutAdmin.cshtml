@@ -1,6 +1,7 @@
 ﻿@using Vemianou.Models
 @{
-    USER user = Session["user"] as USER;
+    USER actifuser = Session["user"] as USER;
+    string actif = "admin";
 }
 <!DOCTYPE html>
 <html>
@@ -94,8 +95,7 @@
                         <i class="fa fa-user-circle text-white mt-2 "></i>
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@user.nomprenomsuser</a>
-
+                        <a href="#" class="d-block">@actif</a>
                     </div>
                 </div>
 
