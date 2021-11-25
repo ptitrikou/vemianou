@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Mvc;
 
 
-[Authorize]
 public class AdminController : Controller
     {
         SousFamilleService categorieService = new SousFamilleService();
