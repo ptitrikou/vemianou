@@ -81,17 +81,19 @@
                 
             </div>
             <div class="tab-pane tabs-animation fade" id="tab-content-2" role="tabpanel">
-                @foreach(EvenementViewModel vid in videos) { 
-                    <div class="col-lg-4 col-md-4 border">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@vid.imagepath" allowfullscreen></iframe>
+                <div class="row">
+                    @foreach (EvenementViewModel vid in videos){
+                        <div class="col-lg-4 col-md-4 border">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@vid.imagepath" allowfullscreen></iframe>
+                            </div>
+                            <span class="text-left" style="color:black">@vid.designation</span><br />
+                            <span style="font-size:15px;color:#606060">Date de sortie:@vid.dateevent</span>
                         </div>
-                         <span class="text-left" style="color:black">@vid.designation</span><br/>
-                         <span style="font-size:15px;color:#606060">Date de sortie:@vid.dateevent</span>
+                    }
 
-                    </div>
-                 }
                 </div>
+            </div>
 
         </div>
     </div>
